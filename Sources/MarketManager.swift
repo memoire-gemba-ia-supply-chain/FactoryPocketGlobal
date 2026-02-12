@@ -113,7 +113,7 @@ final class MarketManager {
     }
     
     // CONFIGURE: Replace with your actual GitHub raw URL before App Store submission
-    private static let dataURLString = "https://raw.githubusercontent.com/mouakkid/SHOPFROMLONDON/main/Backend/market_data.json"
+    private static let dataURLString = "https://raw.githubusercontent.com/memoire-gemba-ia-supply-chain/FactoryPocketGlobal/main/Backend/market_data.json"
     private var dataURL: URL? { URL(string: Self.dataURLString) }
     static let cacheKey = "fpg_market_cache"
     private var storageKey: String { Self.cacheKey }
