@@ -117,8 +117,10 @@ final class MarketManager {
     private var dataURL: URL? { URL(string: Self.dataURLString) }
     static let cacheKey = "fpg_market_cache"
     private var storageKey: String { Self.cacheKey }
-    // Smart polling replaces fixed interval
+    // Smart polling + cache guardrails.
     private let maxCacheSize = 512_000  // 512 KB max cache size
+    private let refreshIntervalSeconds: TimeInterval = 2 * 60 * 60
+    private let refreshToleranceSeconds: TimeInterval = 20 * 60
     
     private let refreshTaskHolder = TaskHolder()
     
@@ -132,19 +134,17 @@ final class MarketManager {
     // ── Foreground Refresh Check ─────────────────
     
     /// Called when app becomes active.
-    /// Triggers refresh if data is missing or stale (older than 2h + 5min margin).
+    /// Triggers refresh if data is missing or older than the expected cadence.
     func checkDataFreshness() {
-        guard let last = lastFetchDate else {
+        let referenceDate = data.flatMap { parseLastUpdateDate($0.lastUpdate) } ?? lastFetchDate
+        guard let last = referenceDate else {
             // No data at all -> fetch immediately
             Task { await refreshMarketData() }
             return
         }
         
         let elapsed = Date().timeIntervalSince(last)
-        // If data is older than 2 hours and 10 minutes (to be safe), refresh.
-        // GitHub updates every 2h. Smart polling tries at 2h05m.
-        // If user opens app at 2h15m and last fetch was 0h05m, we should refresh.
-        if elapsed > (2 * 60 * 60 + 10 * 60) {
+        if elapsed > (refreshIntervalSeconds + refreshToleranceSeconds) {
             logger.info("Data is stale (\(Int(elapsed/60)) min old), triggering refresh on open.")
             Task { await refreshMarketData() }
         }
@@ -156,7 +156,7 @@ final class MarketManager {
         refreshTaskHolder.cancel()
         refreshTaskHolder.task = Task {
             while !Task.isCancelled {
-                // Calculate delay to next synchronized slot (EvenHour:05)
+                // Calculate delay to next synchronized slot (EvenHour:15 UTC).
                 let delay = timeIntervalToNextRefresh()
                 logger.info("Next market sync in \(Int(delay/60)) min")
                 
@@ -170,25 +170,27 @@ final class MarketManager {
         }
     }
     
-    /// Calculates seconds until the next "Even Hour:05" (e.g. 02:05, 04:05...)
-    /// Used to sync with GitHub Actions which runs at 00:00, 02:00...
+    /// Calculates seconds until the next UTC "Even Hour:15" (e.g. 02:15, 04:15...).
+    /// The workflow runs at Even Hour:05 UTC; app refresh at :15 avoids fetching
+    /// the previous snapshot while the bot is still updating files.
     private func timeIntervalToNextRefresh() -> TimeInterval {
-        let calendar = Calendar.current
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .current
         let now = Date()
         
-        // Check slots for today: 0:05, 2:05, ... 22:05
+        // Check slots for today: 00:15, 02:15, ... 22:15 UTC
         let evenHours = Array(stride(from: 0, through: 22, by: 2))
         
         for h in evenHours {
-            if let date = calendar.date(bySettingHour: h, minute: 5, second: 0, of: now),
+            if let date = calendar.date(bySettingHour: h, minute: 15, second: 0, of: now),
                date > now {
                 return date.timeIntervalSince(now)
             }
         }
         
-        // If none found today, target 00:05 tomorrow
+        // If none found today, target 00:15 tomorrow UTC.
         if let tomorrow = calendar.date(byAdding: .day, value: 1, to: now),
-           let next = calendar.date(bySettingHour: 0, minute: 5, second: 0, of: tomorrow) {
+           let next = calendar.date(bySettingHour: 0, minute: 15, second: 0, of: tomorrow) {
             return next.timeIntervalSince(now)
         }
         
@@ -201,11 +203,13 @@ final class MarketManager {
     func loadFromCache() {
         if let savedData = UserDefaults.standard.data(forKey: storageKey),
            let decoded = try? JSONDecoder().decode(MarketData.self, from: savedData) {
+            self.lastFetchDate = parseLastUpdateDate(decoded.lastUpdate)
             let freshness = checkFreshness(decoded.lastUpdate)
             switch freshness {
             case .fresh:
                 self.data = decoded
                 self.dataIsStale = false
+                self.auditStatus = L10n.dataVerified
             case .stale:
                 self.data = decoded
                 self.dataIsStale = true
@@ -239,13 +243,14 @@ final class MarketManager {
             // ── Run Audit Pipeline ──
             if let audited = auditData(decoded) {
                 self.data = audited
-                self.dataIsStale = false
-                self.auditStatus = L10n.dataVerified
+                if auditStatus.isEmpty {
+                    self.auditStatus = L10n.dataVerified
+                }
                 // Only cache if data is within size limit
                 if fetchData.count <= maxCacheSize {
                     UserDefaults.standard.set(fetchData, forKey: storageKey)
                 }
-                self.lastFetchDate = Date()
+                self.lastFetchDate = parseLastUpdateDate(audited.lastUpdate) ?? Date()
             } else {
                 logger.warning("Fetched data rejected by audit")
                 // Fallback to bundle if rejected and no previous data
@@ -263,9 +268,16 @@ final class MarketManager {
     }
     
     private func loadFromBundle() {
-        guard let url = Bundle.module.url(forResource: "market_data", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let decoded = try? JSONDecoder().decode(MarketData.self, from: data) else {
+        let candidates: [URL?] = [
+            Bundle.module.url(forResource: "market_data", withExtension: "json"),
+            Bundle.module.url(forResource: "market_data", withExtension: "json", subdirectory: "Backend"),
+            Bundle.module.url(forResource: "Backend/market_data", withExtension: "json")
+        ]
+        guard
+            let url = candidates.compactMap({ $0 }).first,
+            let data = try? Data(contentsOf: url),
+            let decoded = try? JSONDecoder().decode(MarketData.self, from: data)
+        else {
             logger.error("Failed to load local bundle data")
             setMockData()
             return
@@ -274,8 +286,8 @@ final class MarketManager {
         self.data = decoded
         // Mark as stale since it's build-time data
         self.dataIsStale = true 
-        self.auditStatus = L10n.cacheStale // Reuse existing string or "Offline Data"
-        self.lastFetchDate = nil // Or set to the date in the JSON
+        self.auditStatus = L10n.cacheStale
+        self.lastFetchDate = parseLastUpdateDate(decoded.lastUpdate)
     }
     
     // ── Data Audit Pipeline ──────────────────────
@@ -283,6 +295,8 @@ final class MarketManager {
     /// Validates scraped data before it reaches the UI.
     /// Returns audited MarketData, or nil if data is rejected entirely.
     private func auditData(_ raw: MarketData) -> MarketData? {
+        self.dataIsStale = false
+        self.auditStatus = ""
         
         // 1) Freshness check: prefer today's data, accept up to 48h as stale
         let freshness = checkFreshness(raw.lastUpdate)
@@ -396,44 +410,44 @@ final class MarketManager {
     }
     
     private enum DataFreshness { case fresh, stale, rejected }
+
+    /// Parses server date formats used by the scraper (ISO8601 with/without micros).
+    private func parseLastUpdateDate(_ dateString: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = formatter.date(from: dateString) {
+            return date
+        }
+
+        formatter.formatOptions = [.withInternetDateTime]
+        if let date = formatter.date(from: dateString) {
+            return date
+        }
+
+        let microDate = DateFormatter()
+        microDate.locale = Locale(identifier: "en_US_POSIX")
+        microDate.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        if let date = microDate.date(from: dateString) {
+            return date
+        }
+
+        if dateString.count >= 10 {
+            let shortDate = DateFormatter()
+            shortDate.dateFormat = "yyyy-MM-dd"
+            shortDate.locale = Locale(identifier: "en_US_POSIX")
+            return shortDate.date(from: String(dateString.prefix(10)))
+        }
+
+        return nil
+    }
     
     /// Checks data freshness with 3-tier system:
     /// - fresh: data is from today
     /// - stale: data is 1-48h old (show with warning)
     /// - rejected: data is >48h old
     private func checkFreshness(_ dateString: String) -> DataFreshness {
-        let formatter = ISO8601DateFormatter()
-        var parsedDate: Date?
-        
-        // 1. Try standard ISO8601 with fractional seconds (most likely for scraper)
-        // Note: distinct options for better compatibility
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        parsedDate = formatter.date(from: dateString)
-        
-        // 2. Try standard ISO8601 without fractional seconds
-        if parsedDate == nil {
-            formatter.formatOptions = [.withInternetDateTime]
-            parsedDate = formatter.date(from: dateString)
-        }
-        
-        // 3. Robust fallback using DateFormatter for fixed format (Scraper output)
-        // The scraper outputs: "2026-02-12T12:07:47.790295+00:00"
-        if parsedDate == nil {
-            let df = DateFormatter()
-            df.locale = Locale(identifier: "en_US_POSIX")
-            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" // Handle microseconds
-            parsedDate = df.date(from: dateString)
-        }
-        
-        // 4. Fallback: try date-only format ("2026-02-12")
-        if parsedDate == nil, dateString.count >= 10 {
-            let df = DateFormatter()
-            df.dateFormat = "yyyy-MM-dd"
-            df.locale = Locale(identifier: "en_US_POSIX")
-            parsedDate = df.date(from: String(dateString.prefix(10)))
-        }
-        
-        guard let date = parsedDate else {
+        guard let date = parseLastUpdateDate(dateString) else {
             logger.warning("Could not parse lastUpdate: \(dateString)")
             return .rejected
         }
