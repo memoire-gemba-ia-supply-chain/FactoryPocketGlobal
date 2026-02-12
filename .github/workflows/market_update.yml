@@ -1,0 +1,53 @@
+name: Daily Market Update
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Every 2 hours (0:00, 2:00, 4:00...)
+  workflow_dispatch:
+
+jobs:
+  update-market-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: pip install yfinance
+
+      - name: Run Scraper (v4.0)
+        run: python Backend/scraper.py
+
+      - name: Validate Output
+        run: |
+          if [ ! -f Backend/market_data.json ]; then
+            echo "❌ market_data.json not generated"
+            exit 1
+          fi
+          ITEMS=$(python3 -c "import json; d=json.load(open('Backend/market_data.json')); print(d['totalItems'])")
+          RATES=$(python3 -c "import json; d=json.load(open('Backend/market_data.json')); print(len(d.get('rates',{})))")
+          echo "✅ market_data.json: $ITEMS items, $RATES exchange rates"
+          if [ "$ITEMS" -lt 5 ]; then
+            echo "⚠️  Too few items — skipping commit"
+            exit 1
+          fi
+
+      - name: Audit Exchange Rates
+        run: python Backend/audit_rates.py
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "Market Bot"
+          git config --global user.email "market-bot@github.io"
+          git add Backend/market_data.json Backend/audit_report.json
+          git diff-index --quiet HEAD || git commit -m "chore: market update $(date -u +'%Y-%m-%d %H:%M') [skip ci]"
+          git push
+
