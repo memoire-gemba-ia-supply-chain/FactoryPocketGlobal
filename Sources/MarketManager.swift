@@ -405,16 +405,27 @@ final class MarketManager {
         let formatter = ISO8601DateFormatter()
         var parsedDate: Date?
         
-        // Try with fractional seconds first, then without
+        // 1. Try standard ISO8601 with fractional seconds (most likely for scraper)
+        // Note: distinct options for better compatibility
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         parsedDate = formatter.date(from: dateString)
         
+        // 2. Try standard ISO8601 without fractional seconds
         if parsedDate == nil {
             formatter.formatOptions = [.withInternetDateTime]
             parsedDate = formatter.date(from: dateString)
         }
         
-        // Fallback: try date-only format ("2026-02-12")
+        // 3. Robust fallback using DateFormatter for fixed format (Scraper output)
+        // The scraper outputs: "2026-02-12T12:07:47.790295+00:00"
+        if parsedDate == nil {
+            let df = DateFormatter()
+            df.locale = Locale(identifier: "en_US_POSIX")
+            df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ" // Handle microseconds
+            parsedDate = df.date(from: dateString)
+        }
+        
+        // 4. Fallback: try date-only format ("2026-02-12")
         if parsedDate == nil, dateString.count >= 10 {
             let df = DateFormatter()
             df.dateFormat = "yyyy-MM-dd"
