@@ -41,10 +41,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "AppModule",
-            path: "Sources",
-            resources: [
-                .copy("../Backend")
-            ]
+            path: "Sources"
         )
     ]
 )

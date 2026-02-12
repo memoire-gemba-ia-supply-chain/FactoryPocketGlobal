@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(UnitManager.self) private var unitManager
+    @Environment(MarketManager.self) private var marketManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -22,11 +23,24 @@ struct SettingsView: View {
                     }
                     
                     Section {
-                        Button(L10n.resetCache, role: .destructive) {
-                            UserDefaults.standard.removeObject(forKey: MarketManager.cacheKey)
+                        Button {
+                            Task { await marketManager.refreshMarketData() }
+                        } label: {
+                            HStack {
+                                Text(L10n.refreshNow)
+                                Spacer()
+                                if marketManager.isLoading {
+                                    ProgressView()
+                                }
+                            }
                         }
+                        .disabled(marketManager.isLoading)
                     } footer: {
-                        Text(L10n.resetCacheFooter)
+                        Text(
+                            L10n.isFrench
+                            ? "Source des données: pipeline en ligne GitHub (scraper + audit + publication)."
+                            : "Data source: online GitHub pipeline (scraper + audit + publish)."
+                        )
                     }
                     
                     Section {

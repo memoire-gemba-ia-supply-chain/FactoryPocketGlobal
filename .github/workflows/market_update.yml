@@ -4,6 +4,17 @@ on:
   schedule:
     - cron: '5 */2 * * *' # Every 2 hours at :05 UTC (0:05, 2:05, 4:05...)
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - Backend/scraper.py
+      - Backend/audit_rates.py
+      - .github/workflows/market_update.yml
+
+concurrency:
+  group: market-update
+  cancel-in-progress: false
 
 permissions:
   contents: write
