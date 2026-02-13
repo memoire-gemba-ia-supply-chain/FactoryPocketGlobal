@@ -27,6 +27,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          # Queued runs can start from an older SHA; always base off latest main.
+          ref: main
+          # Needed for git pull/rebase when the remote advanced (non-fast-forward pushes).
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -59,8 +64,115 @@ jobs:
 
       - name: Commit and Push
         run: |
+          set -euo pipefail
           git config --global user.name "Market Bot"
           git config --global user.email "market-bot@github.io"
+
+          get_remote_last_update() {
+            (git show "origin/main:Backend/market_data.json" 2>/dev/null || echo '{}') \
+              | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d.get("last_update",""))'
+          }
+
+          # Ensure the runner sees the latest remote head.
+          git fetch origin main --prune
+
+          REMOTE_LAST_UPDATE="$(get_remote_last_update)"
+          LOCAL_LAST_UPDATE="$(
+            python3 -c 'import json; d=json.load(open("Backend/market_data.json")); print(d.get("last_update",""))'
+          )"
+          export REMOTE_LAST_UPDATE LOCAL_LAST_UPDATE
+
+          CODE=0
+          python3 - <<'PY' || CODE=$?
+          from datetime import datetime
+          import os
+          import sys
+
+          remote = os.environ.get("REMOTE_LAST_UPDATE", "").strip()
+          local = os.environ.get("LOCAL_LAST_UPDATE", "").strip()
+
+          def parse(s: str):
+              if not s:
+                  return None
+              try:
+                  return datetime.fromisoformat(s)
+              except Exception:
+                  return None
+
+          r = parse(remote)
+          l = parse(local)
+
+          if r and l and r >= l:
+              print(
+                  "Remote market_data.json already newer/equal "
+                  f"(remote={remote}, local={local}). Skipping push."
+              )
+              sys.exit(3)
+
+          if not l:
+              print("Local market_data.json has no last_update; proceeding with commit/push.")
+          else:
+              print(f"Proceeding with commit/push (remote={remote or 'n/a'}, local={local}).")
+          PY
+
+          if [ "$CODE" -eq 3 ]; then
+            exit 0
+          elif [ "$CODE" -ne 0 ]; then
+            exit "$CODE"
+          fi
+
           git add Backend/market_data.json Backend/audit_report.json
-          git diff-index --quiet HEAD || git commit -m "chore: market update $(date -u +'%Y-%m-%d %H:%M') [skip ci]"
-          git push
+          git diff --cached --quiet && echo "No changes to commit." && exit 0
+
+          git commit -m "chore: market update $(date -u +'%Y-%m-%d %H:%M') [skip ci]"
+
+          for i in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+
+            echo "Push rejected (non-fast-forward). Checking remote freshness and retrying..."
+            git fetch origin main --prune
+            REMOTE_LAST_UPDATE="$(get_remote_last_update)"
+            export REMOTE_LAST_UPDATE
+
+            CODE=0
+            python3 - <<'PY' || CODE=$?
+          from datetime import datetime
+          import os
+          import sys
+
+          remote = os.environ.get("REMOTE_LAST_UPDATE", "").strip()
+          local = os.environ.get("LOCAL_LAST_UPDATE", "").strip()
+
+          def parse(s: str):
+              if not s:
+                  return None
+              try:
+                  return datetime.fromisoformat(s)
+              except Exception:
+                  return None
+
+          r = parse(remote)
+          l = parse(local)
+
+          if r and l and r >= l:
+              print(
+                  "Remote market_data.json is newer/equal now "
+                  f"(remote={remote}, local={local}). Skipping push."
+              )
+              sys.exit(3)
+          sys.exit(0)
+          PY
+
+            if [ "$CODE" -eq 3 ]; then
+              exit 0
+            elif [ "$CODE" -ne 0 ]; then
+              exit "$CODE"
+            fi
+
+            git pull --rebase origin main
+          done
+
+          echo "Failed to push after retries."
+          exit 1
