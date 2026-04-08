@@ -20,7 +20,7 @@ struct QualityView: View {
                             qRow(title: "DPMO", icon: "exclamationmark.circle.fill", subtitle: "Defects per million", color: .red)
                         }
                         NavigationLink(destination: SigmaLevelCalculator()) {
-                            qRow(title: "Sigma Level", icon: "sigma", subtitle: "Yield to sigma", color: .purple)
+                            qRow(title: "Sigma Level", icon: "s.circle.fill", subtitle: "Yield to sigma", color: .purple)
                         }
                     } header: {
                         qHeader(title: "Six Sigma Metrics", color: .orange)

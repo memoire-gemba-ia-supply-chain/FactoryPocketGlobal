@@ -492,35 +492,23 @@ struct MechanicalView: View {
                 Color(.systemGroupedBackground).ignoresSafeArea()
                 List {
                     Section {
-                        NavigationLink {
-                            BoltTorqueCalculator()
-                        } label: {
-                            Label("Bolt Torque", systemImage: "wrench.fill")
+                        NavigationLink { BoltTorqueCalculator() } label: {
+                            mechRow(title: "Bolt Torque", icon: "wrench.fill", subtitle: "Torque & clamping force", color: .red)
                         }
-                        NavigationLink {
-                            BeamStressCalculator()
-                        } label: {
-                            Label("Beam Stress", systemImage: "rectangle.3.group")
+                        NavigationLink { BeamStressCalculator() } label: {
+                            mechRow(title: "Beam Stress", icon: "rectangle.split.3x1", subtitle: "Deflection & bending moment", color: .orange)
                         }
-                        NavigationLink {
-                            WeldStrengthCalculator()
-                        } label: {
-                            Label("Weld Strength", systemImage: "flame.fill")
+                        NavigationLink { WeldStrengthCalculator() } label: {
+                            mechRow(title: "Weld Strength", icon: "flame.fill", subtitle: "Joint resistance analysis", color: .yellow)
                         }
-                        NavigationLink {
-                            GearTransmissionCalculator()
-                        } label: {
-                            Label("Gear Transmission", systemImage: "gearshape.2.fill")
+                        NavigationLink { GearTransmissionCalculator() } label: {
+                            mechRow(title: "Gear Transmission", icon: "gearshape.2.fill", subtitle: "Speed, torque & power", color: .green)
                         }
-                        NavigationLink {
-                            BearingLifeCalculator()
-                        } label: {
-                            Label("Bearing Life L₁₀", systemImage: "circle.dotted")
+                        NavigationLink { BearingLifeCalculator() } label: {
+                            mechRow(title: "Bearing Life L₁₀", icon: "circle.dotted", subtitle: "Fatigue life estimation", color: .blue)
                         }
-                        NavigationLink {
-                            SpringRateCalculator()
-                        } label: {
-                            Label("Spring Rate", systemImage: "arrow.up.arrow.down")
+                        NavigationLink { SpringRateCalculator() } label: {
+                            mechRow(title: "Spring Rate", icon: "arrow.up.arrow.down", subtitle: "Stiffness & deflection", color: .purple)
                         }
                     } header: {
                         Text("Mechanical Engineering")
@@ -531,5 +519,19 @@ struct MechanicalView: View {
             }
             .navigationTitle("Mechanical ⚙️")
         }
+    }
+
+    private func mechRow(title: String, icon: String, subtitle: String, color: Color) -> some View {
+        HStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10).fill(color.opacity(0.15)).frame(width: 44, height: 44)
+                Image(systemName: icon).font(.title3).foregroundColor(color)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
     }
 }
