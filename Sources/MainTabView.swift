@@ -5,27 +5,27 @@ struct MainTabView: View {
         TabView {
             DashboardView()
                 .tabItem {
-                    Label(L10n.tabDashboard, systemImage: "square.grid.2x2.fill")
+                    Label("Dashboard", systemImage: "chart.bar.fill")
                 }
             
-            SupplyChainView()
+            CalculatorsGridView()
                 .tabItem {
-                    Label(L10n.tabSupplyChain, systemImage: "shippingbox.fill")
-                }
-            
-            TechnicalView()
-                .tabItem {
-                    Label(L10n.tabTechnical, systemImage: "gearshape.2.fill")
-                }
-            
-            FinanceView()
-                .tabItem {
-                    Label(L10n.tabFinance, systemImage: "chart.line.uptrend.xyaxis")
+                    Label("Calculators", systemImage: "function.fill")
                 }
             
             LibraryView()
                 .tabItem {
-                    Label(L10n.tabLibrary, systemImage: "books.vertical.fill")
+                    Label("Reference", systemImage: "books.vertical.fill")
+                }
+            
+            HistoryView()
+                .tabItem {
+                    Label("History", systemImage: "clock.arrow.circlepath")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
                 }
         }
         .accentColor(.orange)
@@ -36,4 +36,5 @@ struct MainTabView: View {
     MainTabView()
         .environment(UnitManager.shared)
         .environment(MarketManager.shared)
+        .environment(ThemeManager.shared)
 }

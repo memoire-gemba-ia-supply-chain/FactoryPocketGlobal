@@ -4,6 +4,7 @@ import SwiftUI
 struct FactoryPocketGlobalApp: App {
     @State private var unitManager = UnitManager.shared
     @State private var marketManager = MarketManager.shared
+    @State private var themeManager = ThemeManager.shared
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var showOnboarding = false
     
@@ -14,7 +15,8 @@ struct FactoryPocketGlobalApp: App {
             MainTabView()
                 .environment(unitManager)
                 .environment(marketManager)
-                .preferredColorScheme(.dark)
+                .environment(themeManager)
+                .preferredColorScheme(themeManager.colorScheme)
                 .onAppear {
                     if !hasSeenOnboarding {
                         showOnboarding = true

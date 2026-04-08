@@ -1216,4 +1216,123 @@ final class FormulaEngine: Sendable {
         guard units > 0 else { return 0 }
         return totalCost / units
     }
+
+    // ─────────────────────────────────────────
+    // MARK: I · MECHANICAL ENGINEERING 🔧
+    // ─────────────────────────────────────────
+    
+    /// **Bolt Torque Calculator**
+    func boltTorque(boltDiameterMM: Double, clampForceKN: Double, kFactor: Double) -> BoltTorqueResult {
+        let forceN = clampForceKN * 1000.0
+        let torque = kFactor * boltDiameterMM * forceN / 1000.0
+        return BoltTorqueResult(torque: torque, unit: "Nm", clampForce: clampForceKN)
+    }
+    
+    /// **Bolt Stress Calculator**
+    func boltStress(clampForceKN: Double, boltDiameterMM: Double) -> (stressMPa: Double, stressAreaMm2: Double) {
+        let forceN = clampForceKN * 1000.0
+        let pitch = 1.5
+        let minDiameter = boltDiameterMM - 1.227 * pitch
+        let stressArea = Double.pi * pow(minDiameter, 2) / 4.0
+        let stress = stressArea > 0 ? forceN / stressArea : 0
+        return (stressMPa: stress, stressAreaMm2: stressArea)
+    }
+    
+    /// **Beam Bending Stress Calculator**
+    func beamBendingStress(forceN: Double, spanMM: Double, widthMM: Double, heightMM: Double, materialE: Double = 210_000) -> BeamStressResult {
+        guard spanMM > 0, widthMM > 0, heightMM > 0 else {
+            return BeamStressResult(maxStressMPa: 0, maxDeflectionMM: 0, bendingMomentNmm: 0, momentOfInertiaMM4: 0)
+        }
+        let bendingMoment = forceN * spanMM / 4.0
+        let inertia = (widthMM * pow(heightMM, 3)) / 12.0
+        let maxStress = (bendingMoment * (heightMM / 2.0)) / (inertia > 0 ? inertia : 1.0)
+        let deflection = (forceN * pow(spanMM, 3)) / (48.0 * materialE * (inertia > 0 ? inertia : 1.0))
+        return BeamStressResult(maxStressMPa: maxStress, maxDeflectionMM: deflection, bendingMomentNmm: bendingMoment, momentOfInertiaMM4: inertia)
+    }
+    
+    /// **Fillet Weld Strength Calculator**
+    func filletWeldStrength(throatMM: Double, lengthMM: Double, ultimateMPa: Double, betaW: Double, gammaM2: Double = 1.25) -> WeldStrengthResult {
+        guard throatMM > 0, lengthMM > 0 else {
+            return WeldStrengthResult(designResistanceKN: 0, shearStressMPa: 0, weldAreaMM2: 0)
+        }
+        let weldArea = throatMM * lengthMM
+        let fvwk = (ultimateMPa / sqrt(3.0)) * betaW
+        let resistance = fvwk * weldArea / gammaM2
+        return WeldStrengthResult(designResistanceKN: resistance / 1000.0, shearStressMPa: fvwk, weldAreaMM2: weldArea)
+    }
+    
+    /// **Gear Transmission Calculator**
+    func gearTransmission(teethDriver: Int, teethDriven: Int, inputSpeedRPM: Double, inputTorqueNm: Double, efficiency: Double = 0.97) -> GearTransmissionResult {
+        guard teethDriver > 0, teethDriven > 0 else {
+            return GearTransmissionResult(ratio: 0, outputSpeedRPM: 0, outputTorqueNm: 0, outputPowerKW: 0)
+        }
+        let ratio = Double(teethDriven) / Double(teethDriver)
+        let outputSpeed = inputSpeedRPM / ratio
+        let outputTorque = inputTorqueNm * ratio * efficiency
+        let omega = outputSpeed * Double.pi / 30.0
+        let outputPower = (outputTorque * omega) / 1000.0
+        return GearTransmissionResult(ratio: ratio, outputSpeedRPM: outputSpeed, outputTorqueNm: outputTorque, outputPowerKW: outputPower)
+    }
+    
+    /// **Bearing L₁₀ Life Calculator**
+    func bearingLifeL10(dynamicLoadRatingKN: Double, equivalentLoadKN: Double, exponent: Double, speedRPM: Double) -> BearingLifeResult {
+        guard dynamicLoadRatingKN > 0, equivalentLoadKN > 0, speedRPM > 0 else {
+            return BearingLifeResult(lifeHours: 0, lifeYears: 0, lifeRevolutions: 0)
+        }
+        let ratioCP = dynamicLoadRatingKN / equivalentLoadKN
+        let l10Millions = pow(ratioCP, exponent)
+        let lifeHours = (l10Millions * 1_000_000) / (60.0 * speedRPM)
+        let lifeYears = lifeHours / (24.0 * 365.25)
+        let lifeRevolutions = l10Millions * 1_000_000
+        return BearingLifeResult(lifeHours: lifeHours, lifeYears: lifeYears, lifeRevolutions: lifeRevolutions)
+    }
+    
+    /// **Spring Rate Calculator**
+    func springRate(wireDiameterMM: Double, meanCoilDiameterMM: Double, activeCoils: Double, shearModulusMPa: Double) -> SpringRateResult {
+        guard wireDiameterMM > 0, meanCoilDiameterMM > 0, activeCoils > 0 else {
+            return SpringRateResult(rateNperMM: 0, springIndex: 0)
+        }
+        let numerator = shearModulusMPa * pow(wireDiameterMM, 4)
+        let denominator = 8.0 * pow(meanCoilDiameterMM, 3) * activeCoils
+        let rateNperMM = numerator / (denominator > 0 ? denominator : 1.0)
+        let springIndex = meanCoilDiameterMM / wireDiameterMM
+        return SpringRateResult(rateNperMM: rateNperMM, springIndex: springIndex)
+    }
+}
+
+// ────────────────────────────────────────────────
+// MARK: - Mechanical Result Types
+// ────────────────────────────────────────────────
+
+// BoltTorqueResult is defined in BoltDatabase.swift
+
+struct BeamStressResult {
+    let maxStressMPa: Double
+    let maxDeflectionMM: Double
+    let bendingMomentNmm: Double
+    let momentOfInertiaMM4: Double
+}
+
+struct WeldStrengthResult {
+    let designResistanceKN: Double
+    let shearStressMPa: Double
+    let weldAreaMM2: Double
+}
+
+struct GearTransmissionResult {
+    let ratio: Double
+    let outputSpeedRPM: Double
+    let outputTorqueNm: Double
+    let outputPowerKW: Double
+}
+
+struct BearingLifeResult {
+    let lifeHours: Double
+    let lifeYears: Double
+    let lifeRevolutions: Double
+}
+
+struct SpringRateResult {
+    let rateNperMM: Double
+    let springIndex: Double
 }

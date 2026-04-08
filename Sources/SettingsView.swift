@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(UnitManager.self) private var unitManager
     @Environment(MarketManager.self) private var marketManager
+    @Environment(ThemeManager.self) private var themeManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -11,6 +12,15 @@ struct SettingsView: View {
                 Color(white: 0.1).ignoresSafeArea()
                 
                 List {
+                    Section("Theme") {
+                        Picker("Theme Mode", selection: Bindable(themeManager).selectedTheme) {
+                            ForEach(ThemeManager.ThemeMode.allCases, id: \.rawValue) { mode in
+                                Text(mode.displayName).tag(mode.rawValue)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                    }
+                    
                     Section(L10n.globalUnits) {
                         Picker(L10n.system, selection: Bindable(unitManager).unitSystem) {
                             ForEach(UnitSystem.allCases, id: \.self) { system in

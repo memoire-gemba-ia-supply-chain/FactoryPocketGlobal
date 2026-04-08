@@ -32,6 +32,19 @@ struct MarketData: Codable {
         case indices, agriculture
     }
 
+    // Memberwise init for audit pipeline
+    init(lastUpdate: String, currencies: [MarketItem], energy: [MarketItem],
+         rates: [String: Double], metals: [MarketItem], indices: [MarketItem],
+         agriculture: [MarketItem]) {
+        self.lastUpdate = lastUpdate
+        self.currencies = currencies
+        self.energy = energy
+        self.rates = rates
+        self.metals = metals
+        self.indices = indices
+        self.agriculture = agriculture
+    }
+
     // Allow missing keys for backward compatibility
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -101,7 +114,7 @@ final class MarketManager {
 
     // Remote-only source of truth for market data.
     private static let dataURLString =
-        "https://raw.githubusercontent.com/memoire-gemba-ia-supply-chain/FactoryPocketGlobal/main/Backend/market_data.json"
+        "https://raw.githubusercontent.com/memoire-gemba-ia-supply-chain/factory-pocket-api/main/market_data.json"
     private var dataURL: URL? { URL(string: Self.dataURLString) }
 
     private let refreshIntervalSeconds: TimeInterval = 2 * 60 * 60
