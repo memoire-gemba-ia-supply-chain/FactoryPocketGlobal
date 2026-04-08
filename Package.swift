@@ -18,8 +18,8 @@ let package = Package(
             targets: ["AppModule"],
             bundleIdentifier: "com.anass.FactoryPocketPro",
             teamIdentifier: "238BLT527D",
-            displayVersion: "1.0",
-            bundleVersion: "1",
+            displayVersion: "1.4",
+            bundleVersion: "4",
             appIcon: .asset("AppIconNew"),
             accentColor: .presetColor(.orange),
             supportedDeviceFamilies: [
