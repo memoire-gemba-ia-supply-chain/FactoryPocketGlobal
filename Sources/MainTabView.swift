@@ -10,7 +10,7 @@ struct MainTabView: View {
             
             CalculatorsGridView()
                 .tabItem {
-                    Label("Calculators", systemImage: "function.fill")
+                    Label("Calculators", systemImage: "square.grid.2x2.fill")
                 }
             
             LibraryView()
