@@ -203,8 +203,14 @@ def fetch_with_retry(ticker: str, retries: int = MAX_RETRIES) -> dict | None:
             if hasattr(data.columns, 'levels') and len(data.columns.levels) > 1:
                 data.columns = data.columns.droplevel(1)
 
-            latest = float(data["Close"].iloc[-1])
-            prev   = float(data["Close"].iloc[-2])
+            # Drop NaN rows before extracting prices
+            close_series = data["Close"].dropna()
+            if len(close_series) < 2:
+                print(f"  ⚠  {ticker}: not enough non-NaN close prices")
+                return None
+
+            latest = float(close_series.iloc[-1])
+            prev   = float(close_series.iloc[-2])
 
             if latest <= 0 or prev <= 0:
                 return None
@@ -328,7 +334,14 @@ def fetch_exchanger_rates() -> tuple[dict[str, float], dict]:
                 if hasattr(data.columns, 'levels') and len(data.columns.levels) > 1:
                     data.columns = data.columns.droplevel(1)
                 
-                price = float(data["Close"].iloc[-1])
+                close_series = data["Close"].dropna()
+                if len(close_series) < 1:
+                    if attempt < MAX_RETRIES:
+                        time.sleep(delay)
+                        delay *= 2
+                        continue
+                    break
+                price = float(close_series.iloc[-1])
                 
                 if price <= 0:
                     price = None
