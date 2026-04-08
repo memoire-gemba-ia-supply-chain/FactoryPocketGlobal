@@ -114,7 +114,7 @@ final class MarketManager {
 
     // Remote-only source of truth for market data.
     private static let dataURLString =
-        "https://raw.githubusercontent.com/memoire-gemba-ia-supply-chain/factory-pocket-api/main/market_data.json"
+        "https://raw.githubusercontent.com/mouakkid/factory-pocket-api/main/market_data.json"
     private var dataURL: URL? { URL(string: Self.dataURLString) }
 
     private let refreshIntervalSeconds: TimeInterval = 2 * 60 * 60
