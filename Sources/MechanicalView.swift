@@ -72,7 +72,6 @@ struct BoltTorqueCalculator: View {
         }, results: {
             ["Torque": String(format: "%.1f N·m", result.torque), "Stress": String(format: "%.0f MPa", stress.stressMPa)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -126,7 +125,6 @@ struct BeamStressCalculator: View {
         }, results: {
             ["Max Stress": String(format: "%.1f MPa", result.maxStressMPa), "Deflection": String(format: "%.3f mm", result.maxDeflectionMM)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -190,7 +188,6 @@ struct WeldStrengthCalculator: View {
         }, results: {
             ["Resistance": String(format: "%.1f kN", result.designResistanceKN)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -247,7 +244,6 @@ struct GearTransmissionCalculator: View {
         }, results: {
             ["Ratio": String(format: "%.2f", result.ratio), "Output Speed": String(format: "%.0f RPM", result.outputSpeedRPM)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -316,7 +312,6 @@ struct BearingLifeCalculator: View {
         }, results: {
             ["Life": String(format: "%.0f h", result.lifeHours)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -402,7 +397,6 @@ struct SpringRateCalculator: View {
         }, results: {
             ["Rate": String(format: "%.2f N/mm", result.rateNperMM), "Index": String(format: "%.1f", result.springIndex)]
         })
-        .preferredColorScheme(.dark)
     }
 }
 

@@ -6,7 +6,7 @@ struct LeanView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -64,8 +64,8 @@ struct LeanView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -83,7 +83,7 @@ private struct LInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -91,7 +91,7 @@ private struct LInput: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
                 if !unit.isEmpty {
-                    Text(unit).font(.caption).foregroundColor(.gray).frame(width: 45, alignment: .leading)
+                    Text(unit).font(.caption).foregroundColor(.secondary).frame(width: 45, alignment: .leading)
                 }
             }
         }
@@ -104,7 +104,7 @@ private func lResult(label: String, value: String, color: Color = .orange) -> so
             .font(.system(size: 34, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -148,7 +148,6 @@ struct LeadTimeCalculator: View {
             }
         }
         .navigationTitle("Lead Time Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -177,7 +176,6 @@ struct CycleEfficiencyCalculator: View {
             }
         }
         .navigationTitle("PCE Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -204,7 +202,6 @@ struct WIPCalculator: View {
             }
         }
         .navigationTitle("WIP Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -242,7 +239,6 @@ struct KanbanCalculator: View {
             }
         }
         .navigationTitle("Kanban Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -274,7 +270,6 @@ struct LineBalancingCalculator: View {
             }
         }
         .navigationTitle("Line Balancing Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -316,7 +311,6 @@ struct SMEDCalculator: View {
             }
         }
         .navigationTitle("SMED Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -348,7 +342,6 @@ struct ThroughputCalculator: View {
             }
         }
         .navigationTitle("Throughput Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -380,6 +373,5 @@ struct VSECalculator: View {
             }
         }
         .navigationTitle("VSE Calculator")
-        .preferredColorScheme(.dark)
     }
 }

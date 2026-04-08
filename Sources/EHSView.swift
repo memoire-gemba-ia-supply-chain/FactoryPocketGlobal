@@ -4,7 +4,7 @@ struct EHSView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -67,8 +67,8 @@ struct EHSView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -86,7 +86,7 @@ private struct EHSInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -94,7 +94,7 @@ private struct EHSInput: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
                 if !unit.isEmpty {
-                    Text(unit).font(.caption).foregroundColor(.gray).frame(width: 60, alignment: .leading)
+                    Text(unit).font(.caption).foregroundColor(.secondary).frame(width: 60, alignment: .leading)
                 }
             }
         }
@@ -107,7 +107,7 @@ private func ehsResult(label: String, value: String, color: Color = .orange) -> 
             .font(.system(size: 34, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -143,11 +143,10 @@ struct FrequencyRateCalculator: View {
             Section("Frequency Rate") {
                 ehsResult(label: "TF (Accidents per 1M hours)", value: String(format: "%.2f", result))
                 Text("Standard OSHA metric for comparing incident rates.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Frequency Rate")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -174,11 +173,10 @@ struct SeverityRateCalculator: View {
             Section("Severity Rate") {
                 ehsResult(label: "TG (Days lost per 1K hours)", value: String(format: "%.2f", result))
                 Text("Measures the severity and impact of injuries, not just frequency.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Severity Rate")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -209,11 +207,10 @@ struct LTIRCalculator: View {
                     color: result < 3 ? .green : result < 6 ? .orange : .red
                 )
                 Text("Injuries causing loss of work time per 200K hours (US standard).")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("LTIR")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -244,11 +241,10 @@ struct TRIRCalculator: View {
                     color: result < 3 ? .green : result < 6 ? .orange : .red
                 )
                 Text("All recordable injuries and illnesses per 200K hours.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("TRIR")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -279,11 +275,10 @@ struct DARTCalculator: View {
                     color: result < 2 ? .green : result < 4 ? .orange : .red
                 )
                 Text("Days Away, Restricted, Transfers per 200K hours (OSHA standard).")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("DART")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -310,11 +305,10 @@ struct SeverityRateOSHACalculator: View {
             Section("OSHA Severity Rate") {
                 ehsResult(label: "SR (Days per 200K hours)", value: String(format: "%.2f", result))
                 Text("Measures lost work days per 200,000 hours worked (US OSHA standard).")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("OSHA Severity Rate")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -345,11 +339,10 @@ struct NearMissRatioCalculator: View {
                     color: result >= 80 ? .green : result >= 60 ? .orange : .red
                 )
                 Text("High ratio indicates effective hazard identification and prevention culture.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Near Miss Ratio")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -385,10 +378,9 @@ struct AccidentCostCalculator: View {
             Section("Total Accident Cost") {
                 ehsResult(label: "Total Cost", value: String(format: "$%.0f", totalCost), color: .red)
                 Text("Bird's ratio estimates indirect costs at 4-5× direct costs (medical, lost time, equipment damage).")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Accident Cost")
-        .preferredColorScheme(.dark)
     }
 }

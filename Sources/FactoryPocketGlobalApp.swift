@@ -16,6 +16,7 @@ struct FactoryPocketGlobalApp: App {
                 .environment(unitManager)
                 .environment(marketManager)
                 .environment(themeManager)
+                .environment(HistoryManager.shared)
                 .preferredColorScheme(themeManager.colorScheme)
                 .onAppear {
                     if !hasSeenOnboarding {

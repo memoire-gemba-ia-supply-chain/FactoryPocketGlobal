@@ -4,7 +4,7 @@ struct MaintenanceView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -67,8 +67,8 @@ struct MaintenanceView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -86,7 +86,7 @@ private struct MainInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -94,7 +94,7 @@ private struct MainInput: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
                 if !unit.isEmpty {
-                    Text(unit).font(.caption).foregroundColor(.gray).frame(width: 60, alignment: .leading)
+                    Text(unit).font(.caption).foregroundColor(.secondary).frame(width: 60, alignment: .leading)
                 }
             }
         }
@@ -107,7 +107,7 @@ private func mainResult(label: String, value: String, color: Color = .orange) ->
             .font(.system(size: 34, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -128,8 +128,8 @@ struct OEEClassicCalculator: View {
     @State private var plannedTime: String = "480"
     @State private var downtime: String = "30"
     @State private var idealCycleTime: String = "2.0"
-    @State private var totalCount: String = "200"
-    @State private var goodCount: String = "190"
+    @State private var totalCount: String = "12500"
+    @State private var goodCount: String = "12200"
     
     var results: (oee: Double, availability: Double, performance: Double, quality: Double) {
         let pt = Double(plannedTime) ?? 0
@@ -138,8 +138,9 @@ struct OEEClassicCalculator: View {
         let tc = Double(totalCount) ?? 0
         let gc = Double(goodCount) ?? 0
         
-        let availability = pt > 0 ? ((pt - dt) / pt) * 100 : 0
-        let performance = tc > 0 && ict > 0 ? ((gc * ict) / (pt * 60)) * 100 : 0
+        let operatingTime = pt - dt // minutes
+        let availability = pt > 0 ? (operatingTime / pt) * 100 : 0
+        let performance = operatingTime > 0 && ict > 0 ? ((tc * ict) / (operatingTime * 60)) * 100 : 0
         let quality = tc > 0 ? (gc / tc) * 100 : 0
         let oee = (availability * performance * quality) / 10000
         
@@ -173,7 +174,6 @@ struct OEEClassicCalculator: View {
             }
         }
         .navigationTitle("OEE Classic")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -206,7 +206,6 @@ struct OEE168Calculator: View {
             }
         }
         .navigationTitle("OEE 168")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -233,11 +232,10 @@ struct MTBFCalculator: View {
             Section("Mean Time Between Failures") {
                 mainResult(label: "MTBF", value: String(format: "%.0f hours", result))
                 Text("Hours of operation expected between failures.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("MTBF")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -264,11 +262,10 @@ struct MTTRCalculator: View {
             Section("Mean Time To Repair") {
                 mainResult(label: "MTTR", value: String(format: "%.2f hours", result))
                 Text("Average time required to restore service after a failure.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("MTTR")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -295,11 +292,10 @@ struct MTTACalculator: View {
             Section("Mean Time To Acknowledge") {
                 mainResult(label: "MTTA", value: String(format: "%.1f min", result))
                 Text("Average time to acknowledge and respond to an incident.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("MTTA")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -332,7 +328,6 @@ struct AvailabilityCalculator: View {
             }
         }
         .navigationTitle("Availability")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -387,7 +382,6 @@ struct FailureRateCalculator: View {
             }
         }
         .navigationTitle("Failure Rate")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -427,10 +421,9 @@ struct MaintenanceCostCalculator: View {
                     color: result <= 5 ? .green : result <= 10 ? .orange : .red
                 )
                 Text("Annual maintenance spend as % of asset value. Target: 3-5%")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Maintenance Cost")
-        .preferredColorScheme(.dark)
     }
 }

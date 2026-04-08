@@ -6,7 +6,7 @@ struct QualityView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -64,8 +64,8 @@ struct QualityView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -83,7 +83,7 @@ private struct QInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -91,7 +91,7 @@ private struct QInput: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
                 if !unit.isEmpty {
-                    Text(unit).font(.caption).foregroundColor(.gray).frame(width: 45, alignment: .leading)
+                    Text(unit).font(.caption).foregroundColor(.secondary).frame(width: 45, alignment: .leading)
                 }
             }
         }
@@ -104,7 +104,7 @@ private func qResult(label: String, value: String, color: Color = .orange) -> so
             .font(.system(size: 34, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -160,7 +160,6 @@ struct CpCalculator: View {
             }
         }
         .navigationTitle("Cp Index Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -212,7 +211,6 @@ struct CpkCalculator: View {
             }
         }
         .navigationTitle("Cpk Index Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -253,7 +251,6 @@ struct DPMOCalculator: View {
             }
         }
         .navigationTitle("DPMO Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -296,7 +293,6 @@ struct SigmaLevelCalculator: View {
             }
         }
         .navigationTitle("Sigma Level Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -341,7 +337,6 @@ struct COPQCalculator: View {
             }
         }
         .navigationTitle("COPQ Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -370,7 +365,6 @@ struct FPYCalculator: View {
             }
         }
         .navigationTitle("FPY Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -394,12 +388,12 @@ struct RTYCalculator: View {
         Form {
             Section("FPY Values") {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Comma-separated FPY decimals").font(.caption).foregroundColor(.gray)
+                    Text("Comma-separated FPY decimals").font(.caption).foregroundColor(.secondary)
                     TextEditor(text: $fpyValues)
                         .frame(height: 80)
                         .background(Color(white: 0.15))
                         .cornerRadius(8)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 }
             }
             Section("Result") {
@@ -407,7 +401,6 @@ struct RTYCalculator: View {
             }
         }
         .navigationTitle("RTY Calculator")
-        .preferredColorScheme(.dark)
     }
 }
 
@@ -453,6 +446,5 @@ struct GageRRCalculator: View {
             }
         }
         .navigationTitle("Gage R&R Calculator")
-        .preferredColorScheme(.dark)
     }
 }
