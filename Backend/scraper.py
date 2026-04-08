@@ -438,7 +438,7 @@ def main():
 
     out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), OUTPUT_FILE)
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(output, f, indent=2, ensure_ascii=False)
+        json.dump(output, f, indent=2, ensure_ascii=False, allow_nan=False)
 
     print(f"\n📄  Saved {total} items + {len(exchanger_rates)} rates → {out_path}")
 
