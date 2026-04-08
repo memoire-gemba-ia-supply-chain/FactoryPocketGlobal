@@ -162,10 +162,10 @@ struct CalculatorToolbar: ViewModifier {
             VStack(alignment: .leading, spacing: 1) {
                 Text(L10n.isFrench ? "Sauvegardé !" : "Saved!")
                     .font(.subheadline).fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 Text(calculatorName)
                     .font(.caption2)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
             }
         }
         .padding(.horizontal, 20)

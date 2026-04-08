@@ -65,7 +65,7 @@ struct BoltTorqueCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Couple de Serrage" : "Bolt Torque")
         .calculatorToolbar(id: "bolt_torque", name: "Bolt Torque", category: "Mechanical", icon: "wrench.fill", colorName: "red", unitSystem: "Metric", inputs: {
             ["Bolt Diameter": boltDiam, "Clamp Force": clampForce, "Condition": conditions[conditionIndex].0]
@@ -118,7 +118,7 @@ struct BeamStressCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Résistance Poutre" : "Beam Stress")
         .calculatorToolbar(id: "beam_stress", name: "Beam Stress", category: "Mechanical", icon: "rectangle.split.3x1", colorName: "red", unitSystem: "Metric", inputs: {
             ["Force": force, "Span": span, "Width": width, "Height": height]
@@ -181,7 +181,7 @@ struct WeldStrengthCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Soudure" : "Weld Strength")
         .calculatorToolbar(id: "weld_strength", name: "Weld Strength", category: "Mechanical", icon: "flame.fill", colorName: "red", unitSystem: "Metric", inputs: {
             ["Throat": throat, "Length": length, "UTS": ultimate]
@@ -237,7 +237,7 @@ struct GearTransmissionCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Transmission" : "Gear Transmission")
         .calculatorToolbar(id: "gear_transmission", name: "Gear Transmission", category: "Mechanical", icon: "gearshape.2.fill", colorName: "red", unitSystem: "Metric", inputs: {
             ["Z1": z1, "Z2": z2, "Speed": speed, "Torque": torque]
@@ -305,7 +305,7 @@ struct BearingLifeCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Roulements L₁₀" : "Bearing Life L₁₀")
         .calculatorToolbar(id: "bearing_life", name: "Bearing Life", category: "Mechanical", icon: "circle.dotted.circle", colorName: "red", unitSystem: "Metric", inputs: {
             ["C": loadRating, "P": eqLoad, "Speed": speed]
@@ -390,7 +390,7 @@ struct SpringRateCalculator: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .background(Color(white: 0.08))
+        .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Ressorts" : "Spring Rate")
         .calculatorToolbar(id: "spring_rate", name: "Spring Rate", category: "Mechanical", icon: "arrow.up.and.down.and.sparkles", colorName: "red", unitSystem: "Metric", inputs: {
             ["Wire d": wireDiam, "Mean D": meanCoilDiam, "Coils": activeCoils]
@@ -412,7 +412,7 @@ private struct MechInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -421,12 +421,12 @@ private struct MechInput: View {
                     .frame(width: 90)
                     .padding(.vertical, 6)
                     .padding(.horizontal, 8)
-                    .background(Color(white: 0.12))
+                    .background(Color(.secondarySystemGroupedBackground))
                     .cornerRadius(8)
                 if !unit.isEmpty {
                     Text(unit)
                         .font(.caption).fontWeight(.medium)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                         .frame(width: 40, alignment: .leading)
                 }
             }
@@ -460,7 +460,7 @@ private func mechHeroResult(icon: String, label: String, value: String, unit: St
         }
         
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity)
     .padding(.vertical, 12)
@@ -489,7 +489,7 @@ struct MechanicalView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 List {
                     Section {
                         NavigationLink {

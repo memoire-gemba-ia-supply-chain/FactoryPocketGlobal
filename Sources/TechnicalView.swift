@@ -4,7 +4,7 @@ struct TechnicalView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -100,8 +100,8 @@ struct TechnicalView: View {
                     .foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -128,7 +128,7 @@ private func bigResult(label: String, value: String, color: Color = .orange) -> 
             .font(.system(size: 36, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity)
     .padding()
@@ -142,7 +142,7 @@ private struct InputField: View {
     var body: some View {
         HStack {
             Text(label)
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -151,7 +151,7 @@ private struct InputField: View {
                     .frame(width: 90)
                 if !unit.isEmpty {
                     Text(unit)
-                        .font(.caption).foregroundColor(.gray)
+                        .font(.caption).foregroundColor(.secondary)
                         .frame(width: 40, alignment: .leading)
                 }
             }
@@ -198,7 +198,7 @@ struct CylinderForceCalculator: View {
             }
         }
         .navigationTitle(L10n.cylinderForce)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -232,7 +232,7 @@ struct HydraulicPowerCalculator: View {
             }
         }
         .navigationTitle(L10n.hydraulicPower)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -270,7 +270,7 @@ struct ClampingForceCalculator: View {
             }
         }
         .navigationTitle(L10n.clampingForce)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -318,7 +318,7 @@ struct CoolingTimeCalculator: View {
             }
         }
         .navigationTitle(L10n.coolingTime)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -405,7 +405,7 @@ struct VoltageDropCalculator: View {
             }
         }
         .navigationTitle(L10n.voltageDrop)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -450,7 +450,7 @@ struct MotorCalculatorView: View {
             }
         }
         .navigationTitle(L10n.threePhaseMotor)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -512,7 +512,7 @@ struct AirLeakCalculator: View {
             }
         }
         .navigationTitle(L10n.airLeakCost)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -566,7 +566,7 @@ struct FlowVelocityCalculator: View {
             }
         }
         .navigationTitle(L10n.flowVelocity)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -629,7 +629,7 @@ struct PipePressureLossCalculator: View {
             }
         }
         .navigationTitle(L10n.pipePressureLoss)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -690,7 +690,7 @@ struct CableSizingCalculator: View {
             }
         }
         .navigationTitle(L10n.cableSizing)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -731,7 +731,7 @@ struct CapacitorBankCalculator: View {
             }
         }
         .navigationTitle(L10n.capacitorBank)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -768,7 +768,7 @@ struct TransformerSizingCalculator: View {
             }
         }
         .navigationTitle(L10n.transformerSizing)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -821,7 +821,7 @@ struct PneumaticCylinderCalculator: View {
             }
         }
         .navigationTitle(L10n.pneumaticCylinder)
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -853,6 +853,6 @@ struct ValveCvCalculator: View {
             }
         }
         .navigationTitle(L10n.valveCv)
-        .preferredColorScheme(.dark)
+        
     }
 }

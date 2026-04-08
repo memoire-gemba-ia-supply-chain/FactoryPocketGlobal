@@ -98,7 +98,7 @@ struct Badge: View {
             
             Text("\(count)")
                 .font(.caption.bold())
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
         }
         .frame(width: 32, height: 32)
     }

@@ -46,7 +46,7 @@ struct CurrencyExchangerView: View {
                         
                         Text(sourceCurrency)
                             .fontWeight(.bold)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
                 
@@ -84,7 +84,7 @@ struct CurrencyExchangerView: View {
                         
                         Text("1 \(sourceCurrency) = \(String(format: "%.4f", conversionRate)) \(targetCurrency)")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -93,12 +93,12 @@ struct CurrencyExchangerView: View {
                 Section {
                    Text(L10n.lastUpdated(marketManager.lastUpdateText))
                         .font(.caption)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
             }
         }
         .navigationTitle(L10n.currencyExchanger)
-        .preferredColorScheme(.dark)
+        
         .onAppear {
             if rates.isEmpty {
                 Task { await marketManager.refreshMarketData() }

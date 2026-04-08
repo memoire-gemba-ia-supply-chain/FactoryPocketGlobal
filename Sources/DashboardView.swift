@@ -9,7 +9,7 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
@@ -70,7 +70,7 @@ struct DashboardView: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(Date().formatted(date: .abbreviated, time: .omitted).uppercased())
-                    .font(.caption).fontWeight(.bold).foregroundColor(.gray)
+                    .font(.caption).fontWeight(.bold).foregroundColor(.secondary)
             }
             Spacer()
             
@@ -83,7 +83,7 @@ struct DashboardView: View {
                         .foregroundColor(marketManager.dataIsStale ? .red : .green)
                 }
                 Text(marketManager.lastUpdateText)
-                    .font(.caption2).foregroundColor(.gray)
+                    .font(.caption2).foregroundColor(.secondary)
             }
         }
     }
@@ -93,18 +93,18 @@ struct DashboardView: View {
     private func indicesStrip(_ items: [MarketItem]) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Label(L10n.globalIndices, systemImage: "chart.bar.fill")
-                .font(.headline).foregroundColor(.white)
+                .font(.headline).foregroundColor(.primary)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 6) {
                             Text(item.name)
-                                .font(.caption2).fontWeight(.medium).foregroundColor(.gray)
+                                .font(.caption2).fontWeight(.medium).foregroundColor(.secondary)
                                 .lineLimit(1)
                             
                             Text(formatPrice(item.price, decimals: item.price > 1000 ? 0 : 2))
-                                .font(.subheadline).fontWeight(.black).foregroundColor(.white)
+                                .font(.subheadline).fontWeight(.black).foregroundColor(.primary)
                             if let unit = item.unit, !unit.isEmpty {
                                 Text(unit)
                                     .font(.system(size: 8)).foregroundColor(.gray.opacity(0.7))
@@ -122,7 +122,7 @@ struct DashboardView: View {
                         .frame(width: 120)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(Color(white: 0.14))
+                                .fill(Color(.secondarySystemGroupedBackground))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
                                         .strokeBorder(
@@ -148,7 +148,7 @@ struct DashboardView: View {
                             .foregroundColor(color)
                             .font(.subheadline)
                         Text(title)
-                            .font(.headline).foregroundColor(.white)
+                            .font(.headline).foregroundColor(.primary)
                         Spacer()
                         Text("\(items.count)")
                             .font(.caption2).fontWeight(.bold)
@@ -163,21 +163,21 @@ struct DashboardView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(item.name)
-                                        .font(.subheadline).fontWeight(.medium).foregroundColor(.white)
+                                        .font(.subheadline).fontWeight(.medium).foregroundColor(.primary)
                                     Text(item.ticker)
-                                        .font(.caption2).foregroundColor(.gray)
+                                        .font(.caption2).foregroundColor(.secondary)
                                 }
                                 Spacer()
                                 
                                 HStack(spacing: 4) {
                                     Text(formatPrice(item.price, decimals: item.price > 100 ? 2 : 4))
-                                        .fontWeight(.bold).foregroundColor(.white)
+                                        .fontWeight(.bold).foregroundColor(.primary)
                                     if let unit = item.unit, !unit.isEmpty {
                                         Text(unit)
-                                            .font(.caption2).foregroundColor(.gray)
+                                            .font(.caption2).foregroundColor(.secondary)
                                     } else if let curr = item.currency, !curr.isEmpty {
                                         Text(curr)
-                                            .font(.caption2).foregroundColor(.gray)
+                                            .font(.caption2).foregroundColor(.secondary)
                                     }
                                 }
                                 
@@ -193,7 +193,7 @@ struct DashboardView: View {
                             }
                         }
                     }
-                    .background(Color(white: 0.14))
+                    .background(Color(.secondarySystemGroupedBackground))
                     .cornerRadius(12)
                 }
             }
@@ -207,7 +207,7 @@ struct DashboardView: View {
             Image(systemName: marketManager.dataIsStale ? "clock.badge.exclamationmark" : "wifi.slash")
                 .font(.largeTitle).foregroundColor(marketManager.dataIsStale ? .orange : .gray)
             Text(marketManager.dataIsStale ? L10n.staleData : L10n.marketUnavailable)
-                .foregroundColor(.white).fontWeight(.semibold)
+                .foregroundColor(.primary).fontWeight(.semibold)
             Text(marketManager.dataIsStale ? L10n.staleHint : L10n.loadingHint)
                 .font(.caption).foregroundColor(.gray.opacity(0.7))
                 .multilineTextAlignment(.center)
@@ -226,7 +226,7 @@ struct DashboardView: View {
             }
         }
         .frame(maxWidth: .infinity, minHeight: 150)
-        .background(Color(white: 0.14))
+        .background(Color(.secondarySystemGroupedBackground))
         .cornerRadius(12)
     }
     
@@ -235,7 +235,7 @@ struct DashboardView: View {
     private var quickShortcutsGrid: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(L10n.quickAccess)
-                .font(.headline).foregroundColor(.white)
+                .font(.headline).foregroundColor(.primary)
             
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 NavigationLink(destination: SupplyChainView()) {
@@ -278,14 +278,14 @@ struct ShortcutCard: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 18, height: 18)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
             }
             Text(title)
-                .font(.headline).fontWeight(.bold).foregroundColor(.white)
+                .font(.headline).fontWeight(.bold).foregroundColor(.primary)
             Spacer()
         }
         .padding()
-        .background(Color(white: 0.16))
+        .background(Color(.tertiarySystemGroupedBackground))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
     }

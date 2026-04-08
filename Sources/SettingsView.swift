@@ -9,7 +9,7 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.1).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section("Theme") {
@@ -58,7 +58,7 @@ struct SettingsView: View {
                             Text(L10n.version)
                             Spacer()
                             Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0")
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -80,17 +80,17 @@ struct SettingsView: View {
             HStack {
                 Text(L10n.pressure)
                 Spacer()
-                Text(unitManager.pressureUnit).foregroundColor(.gray)
+                Text(unitManager.pressureUnit).foregroundColor(.secondary)
             }
             HStack {
                 Text(L10n.temperature)
                 Spacer()
-                Text(unitManager.temperatureUnit).foregroundColor(.gray)
+                Text(unitManager.temperatureUnit).foregroundColor(.secondary)
             }
             HStack {
                 Text(L10n.power)
                 Spacer()
-                Text(unitManager.powerUnit).foregroundColor(.gray)
+                Text(unitManager.powerUnit).foregroundColor(.secondary)
             }
         }
     }

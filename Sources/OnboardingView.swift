@@ -27,7 +27,7 @@ struct OnboardingView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+                    .foregroundColor(.primary)
                 
                 // Badge
                 Text(L10n.premiumBadge.uppercased())
@@ -45,13 +45,13 @@ struct OnboardingView: View {
                 VStack(spacing: 15) {
                     Text(L10n.limitedOffer)
                         .font(.headline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                         .textCase(.uppercase)
                     
                     Text(L10n.lifeTimeAccess)
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
@@ -91,7 +91,7 @@ struct OnboardingView: View {
                 }) {
                     Text(L10n.startUsing)
                         .font(.subheadline)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                 }
                 .padding(.bottom, 40)
             }

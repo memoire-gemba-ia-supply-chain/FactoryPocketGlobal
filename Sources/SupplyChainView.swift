@@ -6,7 +6,7 @@ struct SupplyChainView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -92,8 +92,8 @@ struct SupplyChainView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -111,7 +111,7 @@ private struct SCInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -119,7 +119,7 @@ private struct SCInput: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
                 if !unit.isEmpty {
-                    Text(unit).font(.caption).foregroundColor(.gray).frame(width: 45, alignment: .leading)
+                    Text(unit).font(.caption).foregroundColor(.secondary).frame(width: 45, alignment: .leading)
                 }
             }
         }
@@ -132,7 +132,7 @@ private func scResult(label: String, value: String, color: Color = .orange) -> s
             .font(.system(size: 34, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -172,7 +172,7 @@ struct TurnoverCalculator: View {
             }
         }
         .navigationTitle("Inventory Turnover")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -195,7 +195,7 @@ struct DSICalculator: View {
             }
         }
         .navigationTitle("DSI Calculator")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -229,7 +229,7 @@ struct SafetyStockCalculator: View {
             }
         }
         .navigationTitle("Safety Stock")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -256,11 +256,11 @@ struct ROPCalculator: View {
             Section("Reorder Alert") {
                 scResult(label: "Reorder When Stock Reaches", value: String(format: "%.0f units", result), color: .red)
                 Text("Place a new purchase order when inventory drops to this level.")
-                    .font(.caption).foregroundColor(.gray)
+                    .font(.caption).foregroundColor(.secondary)
             }
         }
         .navigationTitle("Reorder Point")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -300,7 +300,7 @@ struct EOQCalculator: View {
             }
         }
         .navigationTitle("EOQ (Wilson)")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -331,7 +331,7 @@ struct FillRateCalculator: View {
             }
         }
         .navigationTitle("Fill Rate")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -358,7 +358,7 @@ struct OTDCalculator: View {
             }
         }
         .navigationTitle("On-Time Delivery")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -381,7 +381,7 @@ struct FreightCalculator: View {
             }
         }
         .navigationTitle("Freight Cost")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -408,7 +408,7 @@ struct TaktTimeCalculator: View {
             }
         }
         .navigationTitle("Takt Time")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -452,7 +452,7 @@ struct OEECalculator: View {
             }
         }
         .navigationTitle("OEE Calculator")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -484,7 +484,7 @@ struct SixSigmaCalculator: View {
             }
         }
         .navigationTitle("Six Sigma")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -509,7 +509,7 @@ struct UtilizationCalculator: View {
             }
         }
         .navigationTitle("Machine Utilization")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -534,7 +534,7 @@ struct PartWeightCalculator: View {
             }
         }
         .navigationTitle("Part Weight")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -559,7 +559,7 @@ struct ScrapRateCalculator: View {
             }
         }
         .navigationTitle("Scrap Rate")
-        .preferredColorScheme(.dark)
+        
     }
 }
 

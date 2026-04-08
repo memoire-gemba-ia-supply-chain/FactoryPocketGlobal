@@ -7,7 +7,7 @@ struct LibraryView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.1).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     categoryPicker
@@ -36,7 +36,7 @@ struct LibraryView: View {
             }
             .padding()
         }
-        .background(Color(white: 0.12))
+        .background(Color(.secondarySystemGroupedBackground))
     }
     
     private func categoryButton(_ cat: MaterialCategory?) -> some View {
@@ -46,8 +46,8 @@ struct LibraryView: View {
                 .fontWeight(.bold)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(selectedCategory == cat ? Color.orange : Color(white: 0.2))
-                .foregroundColor(selectedCategory == cat ? .black : .white)
+                .background(selectedCategory == cat ? Color.orange : Color(.tertiarySystemFill))
+                .foregroundColor(selectedCategory == cat ? .black : .primary)
                 .cornerRadius(20)
         }
     }
@@ -67,13 +67,13 @@ struct LibraryView: View {
                     VStack(alignment: .leading) {
                         Text(material.name)
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(.primary)
                         Text(material.category.rawValue)
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
-                .listRowBackground(Color(white: 0.15))
+                .listRowBackground(Color(.tertiarySystemGroupedBackground))
             }
         }
     }
@@ -87,7 +87,7 @@ struct LibraryView: View {
                 ImperialBoltTableView()
             }
         }
-        .listRowBackground(Color(white: 0.15))
+        .listRowBackground(Color(.tertiarySystemGroupedBackground))
         .foregroundColor(.orange)
     }
     
@@ -97,7 +97,7 @@ struct LibraryView: View {
                 ISOFitCalculatorView()
             }
         }
-        .listRowBackground(Color(white: 0.15))
+        .listRowBackground(Color(.tertiarySystemGroupedBackground))
         .foregroundColor(.orange)
     }
 }
@@ -157,7 +157,7 @@ struct MetricBoltTableView: View {
                             .font(.headline).foregroundColor(.orange)
                         Spacer()
                         Text("Pitch: \(String(format: "%.2f", bolt.pitch)) mm")
-                            .font(.caption).foregroundColor(.gray)
+                            .font(.caption).foregroundColor(.secondary)
                     }
                     
                     HStack(spacing: 16) {
@@ -171,17 +171,17 @@ struct MetricBoltTableView: View {
                     }
                 }
                 .padding(.vertical, 4)
-                .listRowBackground(Color(white: 0.15))
+                .listRowBackground(Color(.tertiarySystemGroupedBackground))
             }
         }
         .navigationTitle("ISO Metric Bolts")
-        .preferredColorScheme(.dark)
+        
     }
     
     private func boltDetail(label: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(label).font(.caption2).foregroundColor(.gray)
-            Text(value).font(.caption).fontWeight(.bold).foregroundColor(.white)
+            Text(label).font(.caption2).foregroundColor(.secondary)
+            Text(value).font(.caption).fontWeight(.bold).foregroundColor(.primary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -214,7 +214,7 @@ struct ImperialBoltTableView: View {
                             .font(.headline).foregroundColor(.orange)
                         Spacer()
                         Text("UNC \(bolt.tpiUNC) TPI")
-                            .font(.caption).foregroundColor(.gray)
+                            .font(.caption).foregroundColor(.secondary)
                     }
                     
                     HStack(spacing: 16) {
@@ -228,17 +228,17 @@ struct ImperialBoltTableView: View {
                     }
                 }
                 .padding(.vertical, 4)
-                .listRowBackground(Color(white: 0.15))
+                .listRowBackground(Color(.tertiarySystemGroupedBackground))
             }
         }
         .navigationTitle("SAE Imperial Bolts")
-        .preferredColorScheme(.dark)
+        
     }
     
     private func boltDetail(label: String, value: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(label).font(.caption2).foregroundColor(.gray)
-            Text(value).font(.caption).fontWeight(.bold).foregroundColor(.white)
+            Text(label).font(.caption2).foregroundColor(.secondary)
+            Text(value).font(.caption).fontWeight(.bold).foregroundColor(.primary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -271,14 +271,14 @@ struct ISOFitCalculatorView: View {
         Form {
             Section("Nominal Dimension") {
                 HStack {
-                    Text("Diameter").foregroundColor(.white)
+                    Text("Diameter").foregroundColor(.primary)
                     Spacer()
                     HStack(spacing: 4) {
                         TextField("50", text: $diameter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                             .frame(width: 90)
-                        Text("mm").font(.caption).foregroundColor(.gray)
+                        Text("mm").font(.caption).foregroundColor(.secondary)
                     }
                 }
             }
@@ -295,13 +295,13 @@ struct ISOFitCalculatorView: View {
             if let hole = holeDeviation, let shaft = shaftDeviation, let fit = fitType {
                 Section("Deviations (µm)") {
                     HStack {
-                        Text("Hole (\(holeSymbol))").foregroundColor(.gray)
+                        Text("Hole (\(holeSymbol))").foregroundColor(.secondary)
                         Spacer()
                         Text("+\(String(format: "%.1f", hole.lower)) / +\(String(format: "%.1f", hole.upper))")
                             .fontWeight(.bold).foregroundColor(.cyan)
                     }
                     HStack {
-                        Text("Shaft (\(shaftSymbol))").foregroundColor(.gray)
+                        Text("Shaft (\(shaftSymbol))").foregroundColor(.secondary)
                         Spacer()
                         Text("\(String(format: "%.1f", shaft.lower)) / \(String(format: "%.1f", shaft.upper))")
                             .fontWeight(.bold).foregroundColor(.orange)
@@ -313,12 +313,12 @@ struct ISOFitCalculatorView: View {
                     let minClearance = hole.lower - shaft.upper
                     
                     HStack {
-                        Text("Max Clearance").foregroundColor(.gray)
+                        Text("Max Clearance").foregroundColor(.secondary)
                         Spacer()
                         Text(String(format: "%.1f µm", maxClearance)).fontWeight(.bold)
                     }
                     HStack {
-                        Text("Min Clearance").foregroundColor(.gray)
+                        Text("Min Clearance").foregroundColor(.secondary)
                         Spacer()
                         Text(String(format: "%.1f µm", minClearance)).fontWeight(.bold)
                     }
@@ -334,7 +334,7 @@ struct ISOFitCalculatorView: View {
             }
         }
         .navigationTitle("ISO 286 Fits")
-        .preferredColorScheme(.dark)
+        
     }
     
     private func fitColor(_ fit: FitType) -> Color {
@@ -371,12 +371,12 @@ struct MaterialDetailView: View {
             }
         }
         .navigationTitle(material.name)
-        .preferredColorScheme(.dark)
+        
     }
     
     private func propertyRow(label: String, value: String) -> some View {
         HStack {
-            Text(label).foregroundColor(.gray)
+            Text(label).foregroundColor(.secondary)
             Spacer()
             Text(value).fontWeight(.bold).foregroundColor(.orange)
         }

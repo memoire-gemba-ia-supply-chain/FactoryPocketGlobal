@@ -4,7 +4,7 @@ struct FinanceView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(white: 0.08).ignoresSafeArea()
+                Color(.systemGroupedBackground).ignoresSafeArea()
                 
                 List {
                     Section {
@@ -75,8 +75,8 @@ struct FinanceView: View {
                 Image(systemName: icon).font(.title3).foregroundColor(color)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.headline).foregroundColor(.white)
-                Text(subtitle).font(.caption).foregroundColor(.gray)
+                Text(title).font(.headline).foregroundColor(.primary)
+                Text(subtitle).font(.caption).foregroundColor(.secondary)
             }
         }
         .padding(.vertical, 4)
@@ -92,7 +92,7 @@ private struct FinInput: View {
     
     var body: some View {
         HStack {
-            Text(label).foregroundColor(.white)
+            Text(label).foregroundColor(.primary)
             Spacer()
             HStack(spacing: 4) {
                 TextField("0", text: $text)
@@ -101,7 +101,7 @@ private struct FinInput: View {
                     .frame(width: 100)
                 if !unit.isEmpty {
                     Text(unit)
-                        .font(.caption).foregroundColor(.gray)
+                        .font(.caption).foregroundColor(.secondary)
                         .frame(width: 30, alignment: .leading)
                 }
             }
@@ -115,7 +115,7 @@ private func bigFinResult(value: String, label: String, color: Color = .orange) 
             .font(.system(size: 36, weight: .black, design: .rounded))
             .foregroundColor(color)
         Text(label)
-            .font(.caption).foregroundColor(.gray)
+            .font(.caption).foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity).padding()
 }
@@ -156,7 +156,7 @@ struct ROICalculator: View {
             }
         }
         .navigationTitle("ROI & Payback")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -209,7 +209,7 @@ struct NPVCalculator: View {
             }
         }
         .navigationTitle("NPV Calculator")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -261,7 +261,7 @@ struct WACCCalculator: View {
             }
         }
         .navigationTitle("WACC Calculator")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -313,7 +313,7 @@ struct BreakEvenCalculator: View {
             }
         }
         .navigationTitle("Break-Even")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -360,7 +360,7 @@ struct IRRCalculator: View {
             }
         }
         .navigationTitle("IRR Calculator")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -417,7 +417,7 @@ struct DepreciationCalculator: View {
             }
         }
         .navigationTitle("Depreciation")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -446,7 +446,7 @@ struct MarginMarkupCalculator: View {
                         Text(String(format: "%.1f%%", result.margin))
                             .font(.system(size: 30, weight: .black, design: .rounded))
                             .foregroundColor(.green)
-                        Text("Margin").font(.caption).foregroundColor(.gray)
+                        Text("Margin").font(.caption).foregroundColor(.secondary)
                     }
                     .frame(maxWidth: .infinity)
                     
@@ -454,7 +454,7 @@ struct MarginMarkupCalculator: View {
                         Text(String(format: "%.1f%%", result.markup))
                             .font(.system(size: 30, weight: .black, design: .rounded))
                             .foregroundColor(.orange)
-                        Text("Markup").font(.caption).foregroundColor(.gray)
+                        Text("Markup").font(.caption).foregroundColor(.secondary)
                     }
                     .frame(maxWidth: .infinity)
                 }
@@ -469,7 +469,7 @@ struct MarginMarkupCalculator: View {
             }
         }
         .navigationTitle("Margin vs Markup")
-        .preferredColorScheme(.dark)
+        
     }
 }
 
@@ -524,6 +524,6 @@ struct LoanCalculator: View {
             }
         }
         .navigationTitle("Loan Amortization")
-        .preferredColorScheme(.dark)
+        
     }
 }

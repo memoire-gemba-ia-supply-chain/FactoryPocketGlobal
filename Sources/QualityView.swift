@@ -391,7 +391,7 @@ struct RTYCalculator: View {
                     Text("Comma-separated FPY decimals").font(.caption).foregroundColor(.secondary)
                     TextEditor(text: $fpyValues)
                         .frame(height: 80)
-                        .background(Color(white: 0.15))
+                        .background(Color(.tertiarySystemGroupedBackground))
                         .cornerRadius(8)
                         .foregroundColor(.primary)
                 }
