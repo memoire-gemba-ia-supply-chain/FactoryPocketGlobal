@@ -359,7 +359,7 @@ struct SpringRateCalculator: View {
             }
             Section("Results") {
                 mechHeroResult(
-                    icon: "arrow.up.and.down.and.sparkles",
+                    icon: "arrow.up.arrow.down.circle.fill",
                     label: L10n.isFrench ? "Raideur du Ressort" : "Spring Rate (k)",
                     value: String(format: "%.2f", result.rateNperMM),
                     unit: "N/mm",
@@ -392,7 +392,7 @@ struct SpringRateCalculator: View {
         .scrollContentBackground(.hidden)
         .background(Color(.systemGroupedBackground))
         .navigationTitle(L10n.isFrench ? "Ressorts" : "Spring Rate")
-        .calculatorToolbar(id: "spring_rate", name: "Spring Rate", category: "Mechanical", icon: "arrow.up.and.down.and.sparkles", colorName: "red", unitSystem: "Metric", inputs: {
+        .calculatorToolbar(id: "spring_rate", name: "Spring Rate", category: "Mechanical", icon: "arrow.up.arrow.down.circle.fill", colorName: "red", unitSystem: "Metric", inputs: {
             ["Wire d": wireDiam, "Mean D": meanCoilDiam, "Coils": activeCoils]
         }, results: {
             ["Rate": String(format: "%.2f N/mm", result.rateNperMM), "Index": String(format: "%.1f", result.springIndex)]

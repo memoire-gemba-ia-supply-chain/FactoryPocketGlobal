@@ -20,7 +20,7 @@ struct DashboardView: View {
                             
                             marketSection(title: L10n.energyOil, icon: "drop.fill", color: .orange, items: data.energy)
                             marketSection(title: L10n.metals, icon: "diamond.fill", color: .yellow, items: data.metals)
-                            marketSection(title: L10n.currencies, icon: "coloncurrencysign.circle.fill", color: .blue, items: data.currencies)
+                            marketSection(title: L10n.currencies, icon: "dollarsign.circle.fill", color: .blue, items: data.currencies)
                             marketSection(title: L10n.agriculture, icon: "leaf.fill", color: .green, items: data.agriculture)
 
                         } else {

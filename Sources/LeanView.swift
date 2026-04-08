@@ -34,7 +34,7 @@ struct LeanView: View {
                             lRow(title: "SMED", icon: "bolt.fill", subtitle: "Setup time reduction", color: .green)
                         }
                         NavigationLink(destination: ThroughputCalculator()) {
-                            lRow(title: "Throughput", icon: "speedometer", subtitle: "Production rate", color: .teal)
+                            lRow(title: "Throughput", icon: "gauge.with.needle.fill", subtitle: "Production rate", color: .teal)
                         }
                         NavigationLink(destination: VSECalculator()) {
                             lRow(title: "VSE", icon: "percent", subtitle: "Value stream eff.", color: .orange)

@@ -18,7 +18,7 @@ struct TechnicalView: View {
                             calcRow(title: L10n.flowVelocity, icon: "arrow.right.circle.fill", subtitle: L10n.flowVelocitySub, color: .cyan)
                         }
                         NavigationLink(destination: PipePressureLossCalculator()) {
-                            calcRow(title: L10n.pipePressureLoss, icon: "pipe.and.drop.fill", subtitle: L10n.pipePressureLossSub, color: .cyan)
+                            calcRow(title: L10n.pipePressureLoss, icon: "drop.fill", subtitle: L10n.pipePressureLossSub, color: .cyan)
                         }
                     } header: {
                         sectionHeader(title: L10n.hydraulics, color: .cyan)
@@ -43,10 +43,10 @@ struct TechnicalView: View {
                             calcRow(title: L10n.threePhaseMotor, icon: "battery.100percent.bolt", subtitle: L10n.threePhaseMotorSub, color: .yellow)
                         }
                         NavigationLink(destination: CableSizingCalculator()) {
-                            calcRow(title: L10n.cableSizing, icon: "cable.connector", subtitle: L10n.cableSizingSub, color: .yellow)
+                            calcRow(title: L10n.cableSizing, icon: "bolt.circle.fill", subtitle: L10n.cableSizingSub, color: .yellow)
                         }
                         NavigationLink(destination: CapacitorBankCalculator()) {
-                            calcRow(title: L10n.capacitorBank, icon: "bolt.ring.closed", subtitle: L10n.capacitorBankSub, color: .yellow)
+                            calcRow(title: L10n.capacitorBank, icon: "bolt.horizontal.fill", subtitle: L10n.capacitorBankSub, color: .yellow)
                         }
                         NavigationLink(destination: TransformerSizingCalculator()) {
                             calcRow(title: L10n.transformerSizing, icon: "square.grid.3x3.fill", subtitle: L10n.transformerSizingSub, color: .yellow)
@@ -63,7 +63,7 @@ struct TechnicalView: View {
                             calcRow(title: L10n.pneumaticCylinder, icon: "arrow.up.and.down.circle.fill", subtitle: L10n.pneumaticCylinderSub, color: .gray)
                         }
                         NavigationLink(destination: ValveCvCalculator()) {
-                            calcRow(title: L10n.valveCv, icon: "gauge.with.dots.needle.33percent", subtitle: L10n.valveCvSub, color: .gray)
+                            calcRow(title: L10n.valveCv, icon: "gauge.with.needle.fill", subtitle: L10n.valveCvSub, color: .gray)
                         }
                     } header: {
                         sectionHeader(title: L10n.pneumatics, color: .gray)

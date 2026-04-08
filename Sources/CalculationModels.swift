@@ -100,7 +100,7 @@ enum CalculatorRegistry {
         CalculatorInfo(id: "cylinder_force", name: "Cylinder Force", nameFR: "Force Vérin", category: "Hydraulics", categoryFR: "Hydraulique", icon: "drop.fill", color: .cyan),
         CalculatorInfo(id: "hydraulic_power", name: "Hydraulic Power", nameFR: "Puissance Hydraulique", category: "Hydraulics", categoryFR: "Hydraulique", icon: "bolt.horizontal.fill", color: .cyan),
         CalculatorInfo(id: "flow_velocity", name: "Flow Velocity", nameFR: "Vitesse d'Écoulement", category: "Hydraulics", categoryFR: "Hydraulique", icon: "arrow.right.circle.fill", color: .cyan),
-        CalculatorInfo(id: "pipe_pressure_loss", name: "Pipe Pressure Loss", nameFR: "Perte de Charge", category: "Hydraulics", categoryFR: "Hydraulique", icon: "pipe.and.drop.fill", color: .cyan),
+        CalculatorInfo(id: "pipe_pressure_loss", name: "Pipe Pressure Loss", nameFR: "Perte de Charge", category: "Hydraulics", categoryFR: "Hydraulique", icon: "drop.fill", color: .cyan),
         
         // Injection Molding
         CalculatorInfo(id: "clamping_force", name: "Clamping Force", nameFR: "Force de Fermeture", category: "Injection Molding", categoryFR: "Injection Plastique", icon: "cube.transparent.fill", color: .blue),
@@ -109,14 +109,14 @@ enum CalculatorRegistry {
         // Electrical
         CalculatorInfo(id: "voltage_drop", name: "Voltage Drop", nameFR: "Chute de Tension", category: "Electrical", categoryFR: "Électricité", icon: "bolt.fill", color: .yellow),
         CalculatorInfo(id: "motor_calculator", name: "3-Phase Motor", nameFR: "Moteur Triphasé", category: "Electrical", categoryFR: "Électricité", icon: "battery.100percent.bolt", color: .yellow),
-        CalculatorInfo(id: "cable_sizing", name: "Cable Sizing", nameFR: "Section Câble", category: "Electrical", categoryFR: "Électricité", icon: "cable.connector", color: .yellow),
-        CalculatorInfo(id: "capacitor_bank", name: "Capacitor Bank", nameFR: "Batterie Condensateurs", category: "Electrical", categoryFR: "Électricité", icon: "bolt.ring.closed", color: .yellow),
+        CalculatorInfo(id: "cable_sizing", name: "Cable Sizing", nameFR: "Section Câble", category: "Electrical", categoryFR: "Électricité", icon: "bolt.circle.fill", color: .yellow),
+        CalculatorInfo(id: "capacitor_bank", name: "Capacitor Bank", nameFR: "Batterie Condensateurs", category: "Electrical", categoryFR: "Électricité", icon: "bolt.horizontal.fill", color: .yellow),
         CalculatorInfo(id: "transformer_sizing", name: "Transformer Sizing", nameFR: "Dimensionnement Transfo", category: "Electrical", categoryFR: "Électricité", icon: "square.grid.3x3.fill", color: .yellow),
         
         // Pneumatics
         CalculatorInfo(id: "air_leak_cost", name: "Air Leak Cost", nameFR: "Coût Fuite d'Air", category: "Pneumatics", categoryFR: "Pneumatique", icon: "wind", color: .gray),
         CalculatorInfo(id: "pneumatic_cylinder", name: "Pneumatic Cylinder", nameFR: "Vérin Pneumatique", category: "Pneumatics", categoryFR: "Pneumatique", icon: "arrow.up.and.down.circle.fill", color: .gray),
-        CalculatorInfo(id: "valve_cv", name: "Valve Cv/Kv", nameFR: "Valve Cv/Kv", category: "Pneumatics", categoryFR: "Pneumatique", icon: "gauge.with.dots.needle.33percent", color: .gray),
+        CalculatorInfo(id: "valve_cv", name: "Valve Cv/Kv", nameFR: "Valve Cv/Kv", category: "Pneumatics", categoryFR: "Pneumatique", icon: "gauge.with.needle.fill", color: .gray),
         
         // Finance
         CalculatorInfo(id: "roi_payback", name: "ROI & Payback", nameFR: "ROI & Payback", category: "Finance", categoryFR: "Finance", icon: "chart.line.uptrend.xyaxis", color: .green),
@@ -125,7 +125,7 @@ enum CalculatorRegistry {
         CalculatorInfo(id: "break_even", name: "Break-Even", nameFR: "Seuil de Rentabilité", category: "Finance", categoryFR: "Finance", icon: "chart.xyaxis.line", color: .mint),
         CalculatorInfo(id: "cost_unit", name: "Cost per Unit", nameFR: "Coût Unitaire", category: "Finance", categoryFR: "Finance", icon: "dollarsign.square", color: .orange),
         CalculatorInfo(id: "margin_markup", name: "Margin vs Markup", nameFR: "Marge vs Markup", category: "Finance", categoryFR: "Finance", icon: "arrow.up.arrow.down", color: .orange),
-        CalculatorInfo(id: "currency_exchanger", name: "Currency Exchanger", nameFR: "Convertisseur Devises", category: "Finance", categoryFR: "Finance", icon: "coloncurrencysign.arrow.circlepath", color: .blue),
+        CalculatorInfo(id: "currency_exchanger", name: "Currency Exchanger", nameFR: "Convertisseur Devises", category: "Finance", categoryFR: "Finance", icon: "dollarsign.arrow.circlepath", color: .blue),
         
         // Supply Chain
         CalculatorInfo(id: "turnover", name: "Inventory Turnover", nameFR: "Rotation des Stocks", category: "Supply Chain", categoryFR: "Supply Chain", icon: "arrow.triangle.2.circlepath", color: .blue),

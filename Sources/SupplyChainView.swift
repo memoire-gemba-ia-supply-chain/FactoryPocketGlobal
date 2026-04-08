@@ -54,7 +54,7 @@ struct SupplyChainView: View {
                             scRow(title: L10n.machineUtil, icon: "gear.circle.fill", subtitle: L10n.machineUtilSub, color: .orange)
                         }
                         NavigationLink(destination: SixSigmaCalculator()) {
-                            scRow(title: L10n.sixSigma, icon: "sigma", subtitle: L10n.sixSigmaSub, color: .orange)
+                            scRow(title: L10n.sixSigma, icon: "number.circle.fill", subtitle: L10n.sixSigmaSub, color: .orange)
                         }
                     } header: {
                         scHeader(title: L10n.leanOps, color: .orange)
