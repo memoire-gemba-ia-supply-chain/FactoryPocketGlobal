@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-12T19:04:19.786510+00:00",
+  "timestamp": "2026-04-12T19:13:22.312846+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -56,34 +56,34 @@
   },
   "details_per_currency": {
     "EUR": {
-      "rate": 0.8526,
+      "rate": 0.8537,
       "bounds_status": "PASS",
       "ecb_rate": 0.8539,
-      "ecb_deviation_pct": 0.15
+      "ecb_deviation_pct": 0.02
     },
     "GBP": {
-      "rate": 0.7429,
+      "rate": 0.7452,
       "bounds_status": "PASS",
       "ecb_rate": 0.7438,
-      "ecb_deviation_pct": 0.12
-    },
-    "JPY": {
-      "rate": 159.41,
-      "bounds_status": "PASS",
-      "ecb_rate": 159.1922,
-      "ecb_deviation_pct": 0.14
-    },
-    "CAD": {
-      "rate": 1.3848,
-      "bounds_status": "PASS",
-      "ecb_rate": 1.3822,
       "ecb_deviation_pct": 0.19
     },
+    "JPY": {
+      "rate": 159.403,
+      "bounds_status": "PASS",
+      "ecb_rate": 159.1922,
+      "ecb_deviation_pct": 0.13
+    },
+    "CAD": {
+      "rate": 1.385,
+      "bounds_status": "PASS",
+      "ecb_rate": 1.3822,
+      "ecb_deviation_pct": 0.2
+    },
     "AUD": {
-      "rate": 1.416,
+      "rate": 1.4307,
       "bounds_status": "PASS",
       "ecb_rate": 1.4141,
-      "ecb_deviation_pct": 0.13
+      "ecb_deviation_pct": 1.17
     },
     "CNY": {
       "rate": 6.8273,
@@ -92,10 +92,10 @@
       "ecb_deviation_pct": 0.02
     },
     "CHF": {
-      "rate": 0.7884,
+      "rate": 0.7903,
       "bounds_status": "PASS",
       "ecb_rate": 0.7891,
-      "ecb_deviation_pct": 0.09
+      "ecb_deviation_pct": 0.15
     },
     "HKD": {
       "rate": 7.8297,
@@ -104,10 +104,10 @@
       "ecb_deviation_pct": 0.04
     },
     "SGD": {
-      "rate": 1.2737,
+      "rate": 1.2744,
       "bounds_status": "PASS",
       "ecb_rate": 1.2739,
-      "ecb_deviation_pct": 0.02
+      "ecb_deviation_pct": 0.04
     },
     "SEK": {
       "rate": 9.2628,
@@ -162,10 +162,10 @@
       "ecb_deviation_pct": 0.83
     },
     "DKK": {
-      "rate": 6.399,
+      "rate": 6.4067,
       "bounds_status": "PASS",
       "ecb_rate": 6.3809,
-      "ecb_deviation_pct": 0.28
+      "ecb_deviation_pct": 0.4
     },
     "PLN": {
       "rate": 3.617,
