@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-26T10:58:03.341608+00:00",
+  "timestamp": "2026-04-26T13:38:01.236841+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -74,10 +74,10 @@
       "ecb_deviation_pct": 0.05
     },
     "CAD": {
-      "rate": 1.3668,
+      "rate": 1.3667,
       "bounds_status": "PASS",
       "ecb_rate": 1.3681,
-      "ecb_deviation_pct": 0.09
+      "ecb_deviation_pct": 0.1
     },
     "AUD": {
       "rate": 1.398,
@@ -98,7 +98,7 @@
       "ecb_deviation_pct": 0.14
     },
     "HKD": {
-      "rate": 7.8347,
+      "rate": 7.8346,
       "bounds_status": "PASS",
       "ecb_rate": 7.835,
       "ecb_deviation_pct": 0.0
@@ -140,17 +140,17 @@
       "ecb_deviation_pct": 0.03
     },
     "MXN": {
-      "rate": 17.3935,
+      "rate": 17.375,
       "bounds_status": "PASS",
       "ecb_rate": 17.3878,
-      "ecb_deviation_pct": 0.03
+      "ecb_deviation_pct": 0.07
     },
     "TWD": {
       "rate": 31.447,
       "bounds_status": "PASS"
     },
     "ZAR": {
-      "rate": 16.5223,
+      "rate": 16.5221,
       "bounds_status": "PASS",
       "ecb_rate": 16.562,
       "ecb_deviation_pct": 0.24
@@ -168,10 +168,10 @@
       "ecb_deviation_pct": 0.13
     },
     "PLN": {
-      "rate": 3.6173,
+      "rate": 3.6147,
       "bounds_status": "PASS",
       "ecb_rate": 3.6205,
-      "ecb_deviation_pct": 0.09
+      "ecb_deviation_pct": 0.16
     },
     "THB": {
       "rate": 32.31,
@@ -186,16 +186,16 @@
       "ecb_deviation_pct": 0.17
     },
     "HUF": {
-      "rate": 310.84,
+      "rate": 311.08,
       "bounds_status": "PASS",
       "ecb_rate": 312.0731,
-      "ecb_deviation_pct": 0.4
+      "ecb_deviation_pct": 0.32
     },
     "CZK": {
-      "rate": 20.705,
+      "rate": 20.735,
       "bounds_status": "PASS",
       "ecb_rate": 20.8103,
-      "ecb_deviation_pct": 0.51
+      "ecb_deviation_pct": 0.36
     },
     "ILS": {
       "rate": 2.9864,
@@ -214,7 +214,7 @@
       "ecb_deviation_pct": 0.02
     },
     "AED": {
-      "rate": 3.6725,
+      "rate": 3.6724,
       "bounds_status": "PASS"
     },
     "COP": {
