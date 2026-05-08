@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-08T21:13:41.742501+00:00",
+  "timestamp": "2026-05-08T23:05:33.763122+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -122,10 +122,10 @@
       "ecb_deviation_pct": 0.36
     },
     "NOK": {
-      "rate": 9.2006,
+      "rate": 9.206,
       "bounds_status": "PASS",
       "ecb_rate": 9.2012,
-      "ecb_deviation_pct": 0.01
+      "ecb_deviation_pct": 0.05
     },
     "NZD": {
       "rate": 1.6752,
@@ -156,10 +156,10 @@
       "ecb_deviation_pct": 0.19
     },
     "BRL": {
-      "rate": 4.8929,
+      "rate": 4.8945,
       "bounds_status": "PASS",
       "ecb_rate": 4.914,
-      "ecb_deviation_pct": 0.43
+      "ecb_deviation_pct": 0.4
     },
     "DKK": {
       "rate": 6.3389,
@@ -238,7 +238,7 @@
       "ecb_deviation_pct": 0.29
     },
     "MAD": {
-      "rate": 9.1083,
+      "rate": 9.115,
       "bounds_status": "PASS"
     }
   }
