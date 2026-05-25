@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-05-25T13:25:45.316122+00:00",
+  "last_update": "2026-05-25T15:13:50.019942+00:00",
   "totalItems": 31,
   "indices": [
     {
@@ -29,8 +29,8 @@
     {
       "ticker": "^STOXX50E",
       "name": "Euro Stoxx 50",
-      "price": 6124.1201,
-      "trend": 1.74,
+      "price": 6138.7998,
+      "trend": 1.98,
       "currency": null,
       "unit": "pts"
     },
@@ -45,8 +45,8 @@
     {
       "ticker": "^N225",
       "name": "Nikkei 225",
-      "price": 65158.1914,
-      "trend": 2.87,
+      "price": 63339.0703,
+      "trend": 2.68,
       "currency": null,
       "unit": "pts"
     }
@@ -55,15 +55,15 @@
     {
       "ticker": "EURUSD=X",
       "name": "EUR / USD",
-      "price": 1.1648,
-      "trend": 0.23,
+      "price": 1.165,
+      "trend": 0.24,
       "currency": null,
       "unit": null
     },
     {
       "ticker": "USDJPY=X",
       "name": "USD / JPY",
-      "price": 158.903,
+      "price": 158.908,
       "trend": -0.07,
       "currency": null,
       "unit": null
@@ -71,8 +71,8 @@
     {
       "ticker": "GBPUSD=X",
       "name": "GBP / USD",
-      "price": 1.3501,
-      "trend": 0.51,
+      "price": 1.3504,
+      "trend": 0.53,
       "currency": null,
       "unit": null
     },
@@ -87,15 +87,15 @@
     {
       "ticker": "DX-Y.NYB",
       "name": "US Dollar Index",
-      "price": 98.96,
-      "trend": -0.36,
+      "price": 99.002,
+      "trend": -0.32,
       "currency": null,
       "unit": "pts"
     },
     {
       "ticker": "USDMAD=X",
       "name": "USD / MAD",
-      "price": 9.2029,
+      "price": 9.2025,
       "trend": -0.23,
       "currency": null,
       "unit": null
@@ -103,16 +103,16 @@
     {
       "ticker": "EURMAD=X",
       "name": "EUR / MAD",
-      "price": 10.696,
-      "trend": 2.99,
+      "price": 10.704,
+      "trend": 3.07,
       "currency": null,
       "unit": null
     },
     {
       "ticker": "GBPMAD=X",
       "name": "GBP / MAD",
-      "price": 12.404,
-      "trend": 3.24,
+      "price": 12.412,
+      "trend": 3.31,
       "currency": null,
       "unit": null
     }
@@ -261,39 +261,39 @@
   ],
   "rates": {
     "USD": 1.0,
-    "EUR": 0.8585,
-    "GBP": 0.7407,
-    "JPY": 158.906,
-    "CAD": 1.3803,
-    "AUD": 1.394,
+    "EUR": 0.8584,
+    "GBP": 0.7405,
+    "JPY": 158.91,
+    "CAD": 1.3798,
+    "AUD": 1.3923,
     "CNY": 6.7842,
-    "CHF": 0.7821,
+    "CHF": 0.7829,
     "HKD": 7.8341,
-    "SGD": 1.277,
-    "SEK": 9.2794,
-    "KRW": 1513.67,
-    "NOK": 9.2334,
-    "NZD": 1.7019,
+    "SGD": 1.2767,
+    "SEK": 9.2815,
+    "KRW": 1511.02,
+    "NOK": 9.2439,
+    "NZD": 1.7013,
     "INR": 95.22,
-    "MXN": 17.257,
-    "TWD": 31.383,
-    "ZAR": 16.308,
-    "BRL": 5.0067,
-    "DKK": 6.4165,
-    "PLN": 3.6345,
-    "THB": 32.47,
-    "IDR": 17730.0,
-    "HUF": 306.1,
-    "CZK": 20.8294,
-    "ILS": 2.8863,
-    "CLP": 891.94,
+    "MXN": 17.2548,
+    "TWD": 31.396,
+    "ZAR": 16.2866,
+    "BRL": 5.0047,
+    "DKK": 6.415,
+    "PLN": 3.6325,
+    "THB": 32.45,
+    "IDR": 17738.0,
+    "HUF": 305.496,
+    "CZK": 20.813,
+    "ILS": 2.8771,
+    "CLP": 890.42,
     "PHP": 61.279,
-    "AED": 3.6723,
-    "COP": 3643.47,
+    "AED": 3.6722,
+    "COP": 3631.8799,
     "SAR": 3.7523,
     "MYR": 3.951,
-    "RON": 4.4996,
-    "MAD": 9.2029
+    "RON": 4.5003,
+    "MAD": 9.2025
   },
   "exchanger_audit": {
     "total_requested": 33,
