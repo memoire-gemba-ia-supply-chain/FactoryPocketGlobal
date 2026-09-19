@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-19T07:16:54.923562+00:00",
+  "timestamp": "2026-09-19T12:27:14.221687+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -56,16 +56,16 @@
   },
   "details_per_currency": {
     "EUR": {
-      "rate": 0.8704,
+      "rate": 0.8703,
       "bounds_status": "PASS",
       "ecb_rate": 0.8726,
-      "ecb_deviation_pct": 0.25
+      "ecb_deviation_pct": 0.26
     },
     "GBP": {
-      "rate": 0.7466,
+      "rate": 0.7467,
       "bounds_status": "PASS",
       "ecb_rate": 0.7494,
-      "ecb_deviation_pct": 0.37
+      "ecb_deviation_pct": 0.36
     },
     "JPY": {
       "rate": 156.855,
