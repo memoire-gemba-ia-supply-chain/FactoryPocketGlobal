@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-26T11:16:15.513200+00:00",
+  "timestamp": "2026-09-26T16:17:11.234916+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -56,10 +56,10 @@
   },
   "details_per_currency": {
     "EUR": {
-      "rate": 0.8772,
+      "rate": 0.8771,
       "bounds_status": "PASS",
       "ecb_rate": 0.877,
-      "ecb_deviation_pct": 0.03
+      "ecb_deviation_pct": 0.02
     },
     "GBP": {
       "rate": 0.7549,
@@ -86,10 +86,10 @@
       "ecb_deviation_pct": 0.06
     },
     "CNY": {
-      "rate": 6.7125,
+      "rate": 6.7037,
       "bounds_status": "PASS",
       "ecb_rate": 6.7132,
-      "ecb_deviation_pct": 0.01
+      "ecb_deviation_pct": 0.14
     },
     "CHF": {
       "rate": 0.8283,
