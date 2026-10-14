@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-14T18:30:26.828702+00:00",
+  "timestamp": "2026-10-14T23:08:31.106370+00:00",
   "status": "PASS",
   "checks": [
     {
@@ -56,169 +56,169 @@
   },
   "details_per_currency": {
     "EUR": {
-      "rate": 0.8966,
+      "rate": 0.8949,
       "bounds_status": "PASS",
       "ecb_rate": 0.8933,
-      "ecb_deviation_pct": 0.37
-    },
-    "GBP": {
-      "rate": 0.7587,
-      "bounds_status": "PASS",
-      "ecb_rate": 0.7538,
-      "ecb_deviation_pct": 0.65
-    },
-    "JPY": {
-      "rate": 158.258,
-      "bounds_status": "PASS",
-      "ecb_rate": 158.4547,
-      "ecb_deviation_pct": 0.12
-    },
-    "CAD": {
-      "rate": 1.4251,
-      "bounds_status": "PASS",
-      "ecb_rate": 1.4219,
-      "ecb_deviation_pct": 0.23
-    },
-    "AUD": {
-      "rate": 1.4348,
-      "bounds_status": "PASS",
-      "ecb_rate": 1.4266,
-      "ecb_deviation_pct": 0.57
-    },
-    "CNY": {
-      "rate": 6.6866,
-      "bounds_status": "PASS",
-      "ecb_rate": 6.6927,
-      "ecb_deviation_pct": 0.09
-    },
-    "CHF": {
-      "rate": 0.8349,
-      "bounds_status": "PASS",
-      "ecb_rate": 0.8334,
       "ecb_deviation_pct": 0.18
     },
+    "GBP": {
+      "rate": 0.7573,
+      "bounds_status": "PASS",
+      "ecb_rate": 0.7538,
+      "ecb_deviation_pct": 0.47
+    },
+    "JPY": {
+      "rate": 158.142,
+      "bounds_status": "PASS",
+      "ecb_rate": 158.4547,
+      "ecb_deviation_pct": 0.2
+    },
+    "CAD": {
+      "rate": 1.4226,
+      "bounds_status": "PASS",
+      "ecb_rate": 1.4219,
+      "ecb_deviation_pct": 0.05
+    },
+    "AUD": {
+      "rate": 1.4337,
+      "bounds_status": "PASS",
+      "ecb_rate": 1.4266,
+      "ecb_deviation_pct": 0.5
+    },
+    "CNY": {
+      "rate": 6.692,
+      "bounds_status": "PASS",
+      "ecb_rate": 6.6927,
+      "ecb_deviation_pct": 0.01
+    },
+    "CHF": {
+      "rate": 0.8337,
+      "bounds_status": "PASS",
+      "ecb_rate": 0.8334,
+      "ecb_deviation_pct": 0.04
+    },
     "HKD": {
-      "rate": 7.8484,
+      "rate": 7.8477,
       "bounds_status": "PASS",
       "ecb_rate": 7.8481,
       "ecb_deviation_pct": 0.0
     },
     "SGD": {
-      "rate": 1.2849,
+      "rate": 1.2845,
       "bounds_status": "PASS",
       "ecb_rate": 1.2826,
-      "ecb_deviation_pct": 0.18
+      "ecb_deviation_pct": 0.15
     },
     "SEK": {
-      "rate": 10.0292,
+      "rate": 10.0054,
       "bounds_status": "PASS",
       "ecb_rate": 9.967,
-      "ecb_deviation_pct": 0.62
+      "ecb_deviation_pct": 0.39
     },
     "KRW": {
-      "rate": 1341.1801,
+      "rate": 1341.6,
       "bounds_status": "PASS",
       "ecb_rate": 1336.7932,
-      "ecb_deviation_pct": 0.33
+      "ecb_deviation_pct": 0.36
     },
     "NOK": {
-      "rate": 9.525,
+      "rate": 9.5105,
       "bounds_status": "PASS",
       "ecb_rate": 9.4716,
-      "ecb_deviation_pct": 0.56
+      "ecb_deviation_pct": 0.41
     },
     "NZD": {
-      "rate": 1.7892,
+      "rate": 1.7858,
       "bounds_status": "PASS",
       "ecb_rate": 1.7812,
-      "ecb_deviation_pct": 0.45
+      "ecb_deviation_pct": 0.26
     },
     "INR": {
-      "rate": 95.14,
+      "rate": 95.2872,
       "bounds_status": "PASS",
       "ecb_rate": 95.157,
-      "ecb_deviation_pct": 0.02
+      "ecb_deviation_pct": 0.14
     },
     "MXN": {
-      "rate": 18.4831,
+      "rate": 18.4812,
       "bounds_status": "PASS",
       "ecb_rate": 18.3653,
-      "ecb_deviation_pct": 0.64
+      "ecb_deviation_pct": 0.63
     },
     "TWD": {
-      "rate": 32.145,
+      "rate": 32.166,
       "bounds_status": "PASS"
     },
     "ZAR": {
-      "rate": 16.5981,
+      "rate": 16.5953,
       "bounds_status": "PASS",
       "ecb_rate": 16.47,
-      "ecb_deviation_pct": 0.78
+      "ecb_deviation_pct": 0.76
     },
     "BRL": {
-      "rate": 5.0309,
+      "rate": 5.0258,
       "bounds_status": "PASS",
       "ecb_rate": 5.0242,
-      "ecb_deviation_pct": 0.13
+      "ecb_deviation_pct": 0.03
     },
     "DKK": {
-      "rate": 6.7038,
+      "rate": 6.691,
       "bounds_status": "PASS",
       "ecb_rate": 6.6774,
-      "ecb_deviation_pct": 0.39
+      "ecb_deviation_pct": 0.2
     },
     "PLN": {
-      "rate": 3.9192,
+      "rate": 3.9124,
       "bounds_status": "PASS",
       "ecb_rate": 3.8998,
-      "ecb_deviation_pct": 0.5
+      "ecb_deviation_pct": 0.32
     },
     "THB": {
-      "rate": 33.61,
+      "rate": 33.6,
       "bounds_status": "PASS",
       "ecb_rate": 33.5748,
-      "ecb_deviation_pct": 0.1
+      "ecb_deviation_pct": 0.08
     },
     "IDR": {
-      "rate": 17895.0,
+      "rate": 17866.5,
       "bounds_status": "PASS",
       "ecb_rate": 17921.0987,
-      "ecb_deviation_pct": 0.15
+      "ecb_deviation_pct": 0.3
     },
     "HUF": {
-      "rate": 326.249,
+      "rate": 325.65,
       "bounds_status": "PASS",
       "ecb_rate": 324.5199,
-      "ecb_deviation_pct": 0.53
+      "ecb_deviation_pct": 0.35
     },
     "CZK": {
-      "rate": 21.8553,
+      "rate": 21.788,
       "bounds_status": "PASS",
       "ecb_rate": 21.757,
-      "ecb_deviation_pct": 0.45
+      "ecb_deviation_pct": 0.14
     },
     "ILS": {
-      "rate": 3.0975,
+      "rate": 3.0989,
       "bounds_status": "PASS",
       "ecb_rate": 3.0766,
-      "ecb_deviation_pct": 0.68
+      "ecb_deviation_pct": 0.72
     },
     "CLP": {
-      "rate": 984.83,
+      "rate": 981.94,
       "bounds_status": "PASS"
     },
     "PHP": {
-      "rate": 62.89,
+      "rate": 62.793,
       "bounds_status": "PASS",
       "ecb_rate": 62.879,
-      "ecb_deviation_pct": 0.02
+      "ecb_deviation_pct": 0.14
     },
     "AED": {
-      "rate": 3.6728,
+      "rate": 3.6726,
       "bounds_status": "PASS"
     },
     "COP": {
-      "rate": 3181.9199,
+      "rate": 3188.6699,
       "bounds_status": "PASS"
     },
     "SAR": {
@@ -226,19 +226,19 @@
       "bounds_status": "PASS"
     },
     "MYR": {
-      "rate": 4.081,
+      "rate": 4.0828,
       "bounds_status": "PASS",
       "ecb_rate": 4.0825,
-      "ecb_deviation_pct": 0.04
+      "ecb_deviation_pct": 0.01
     },
     "RON": {
-      "rate": 4.7831,
+      "rate": 4.7752,
       "bounds_status": "PASS",
       "ecb_rate": 4.7737,
-      "ecb_deviation_pct": 0.2
+      "ecb_deviation_pct": 0.03
     },
     "MAD": {
-      "rate": 9.8746,
+      "rate": 9.8635,
       "bounds_status": "PASS"
     }
   }
